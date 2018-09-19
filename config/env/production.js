@@ -50,8 +50,8 @@ module.exports = {
       /**
        * Set DATABASE URL via environment variable on production
        */
-      adapter: 'sails-mysql',
-      url: process.env.DATABASE_URL,
+      /*adapter: 'sails-mysql',
+      url: process.env.DATABASE_URL,*/
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
