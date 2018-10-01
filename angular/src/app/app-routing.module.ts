@@ -9,12 +9,23 @@ import { RegisterConfirmComponent } from './auth/register-confirm/register-confi
 import { EditComponent } from './auth/edit/edit.component';
 
 const routes: Routes = [
+
+    /*
+
+    From Template
+
+    */
+
+     
+
     {
         path: '',
         component: HomeComponent,
         pathMatch: 'full',
         data: { state: 'home' }
     },
+
+    /*
     {
         path: 'login',
         component: LoginComponent,
@@ -40,6 +51,14 @@ const routes: Routes = [
         canActivate: [OnlyLoggedInGuard],
         component: EditComponent
     }
+
+    */
+
+    /*
+
+    OSS Implementation
+
+    */
 ];
 
 @NgModule({
