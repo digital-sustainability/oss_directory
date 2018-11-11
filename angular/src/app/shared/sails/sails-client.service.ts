@@ -3,11 +3,12 @@ import { SailsService } from 'angular2-sails';
 import { pipe, Observable } from 'rxjs';
 import { CsrfService } from '../auth/csrf.service';
 import { mergeMap, map } from '../../../../node_modules/rxjs/operators';
+import { RequestService } from './request.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SailsClientService {
+export class SailsClientService implements RequestService{
 
   constructor(private sailsService: SailsService,
     private csrfService: CsrfService) { }
@@ -20,7 +21,7 @@ export class SailsClientService {
       return this.csrfService.getCSRFToken().pipe(mergeMap((csrf) => {
         options.headers['X-CSRF-Token'] = csrf;
         return this.sailsService.request(options)
-          .pipe(map((res) => (<any>(res)).data));
+          .pipe(map((res) => (<any>(res))));
       }));
     }
     return this.sailsService.request(options)

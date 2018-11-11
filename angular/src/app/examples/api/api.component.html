@@ -1,0 +1,63 @@
+<div class="Row">
+    
+  <div class="Column">
+    <p>Id | Title</p>
+    <div *ngFor="let firm of firms$ | async">
+
+        <form  (ngSubmit)="update(firm)" #firmForm="ngForm">
+        
+              {{firm.id}} |
+              <input type="text" class="form-control" id="title"
+                     required
+                     [(ngModel)]="firm.title" name="title" #name="ngModel">
+       
+            <button type="submit" class="btn btn-success" [disabled]="!firmForm.form.valid">Update</button>
+            <button type="button" (click)="delete(firm)">Delete</button>
+          </form>
+      
+    </div>
+
+    <br>
+
+    <form *ngIf="selected_firm" (ngSubmit)="create(selected_firm)" #firmForm="ngForm">
+        <div class="form-group">
+          <label for="title">New</label>
+          <input type="text" class="form-control" id="title"
+                 required
+                 [(ngModel)]="selected_firm.title" name="title"
+                 #name="ngModel">
+        </div>
+   
+        <button type="submit" class="btn btn-success" [disabled]="!firmForm.form.valid">Submit</button>
+      </form>
+  
+  </div>
+
+  <div class="Column">
+      <p>Id | Title</p>
+    <div  *ngFor="let customer of customers$ | async">
+        {{customer.id}} |
+        {{customer.title}}
+    </div>
+   
+  </div>
+
+  <div class="Column">
+      <p>Id | Title</p>
+    <div  *ngFor="let product of products$ | async">
+        {{product.id}} |
+        {{product.title}}
+    </div>
+   
+  </div>
+
+  <div class="Column">
+      <p>Id | Title</p>
+    <div  *ngFor="let reference of references$ | async">
+        {{reference.id}} |
+        {{reference.title}}
+    </div>
+   
+  </div>
+
+</div>

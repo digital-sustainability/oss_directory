@@ -7,6 +7,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { RegisterSuccessfulComponent } from './auth/register-successful/register-successful.component';
 import { RegisterConfirmComponent } from './auth/register-confirm/register-confirm.component';
 import { EditComponent } from './auth/edit/edit.component';
+import { ApiComponent } from './examples/api/api.component';
 
 const routes: Routes = [
 
@@ -20,7 +21,7 @@ const routes: Routes = [
 
     {
         path: '',
-        component: HomeComponent,
+        component: ApiComponent,
         pathMatch: 'full',
         data: { state: 'home' }
     },

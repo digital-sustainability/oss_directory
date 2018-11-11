@@ -15,6 +15,9 @@ import { RegisterComponent } from './auth/register/register.component';
 import { RegisterSuccessfulComponent } from './auth/register-successful/register-successful.component';
 import { RegisterConfirmComponent } from './auth/register-confirm/register-confirm.component';
 import { EditComponent } from './auth/edit/edit.component';
+import { ApiComponent } from './examples/api/api.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 export function appInitFactory(authService: AuthService): () => Promise<any> {
@@ -29,7 +32,8 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
     RegisterComponent,
     RegisterConfirmComponent,
     RegisterSuccessfulComponent,
-    EditComponent
+    EditComponent,
+    ApiComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +42,7 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
     MaterialDesignModule,
     SailsModule.forRoot(),
     HttpClientModule,
+    FormsModule,
   ],
   providers: [
     {
@@ -45,7 +50,7 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
       useClass: HttpInterceptorService,
       multi: true
     },
-    {provide: APP_INITIALIZER, useFactory: appInitFactory, deps: [AuthService], multi: true}
+    {provide: APP_INITIALIZER, useFactory: appInitFactory, deps: [AuthService], multi: true},
   ],
   bootstrap: [AppComponent]
 })
