@@ -19,7 +19,7 @@ export class Firm extends Table {
     city: string;
     description: string;
 
-    deserialize(input) : Table{
+    deserialize(input) : Firm{
         let firm : Firm = new Firm();
         firm.id = input.id;
         firm.title = input.title;

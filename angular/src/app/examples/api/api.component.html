@@ -1,63 +1,62 @@
-<div class="Row">
-    
-  <div class="Column">
-    <p>Id | Title</p>
-    <div *ngFor="let firm of firms$ | async">
 
-        <form  (ngSubmit)="update(firm)" #firmForm="ngForm">
+<mat-tab-group>
+  <mat-tab label="Firm">
+      <mat-accordion *ngFor="let firm of firms">
+          <mat-expansion-panel *ngIf="firm">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{firm.title}}
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
         
-              {{firm.id}} |
-              <input type="text" class="form-control" id="title"
-                     required
-                     [(ngModel)]="firm.title" name="title" #name="ngModel">
-       
-            <button type="submit" class="btn btn-success" [disabled]="!firmForm.form.valid">Update</button>
-            <button type="button" (click)="delete(firm)">Delete</button>
-          </form>
-      
-    </div>
+            <p>ID: {{firm.id}}</p>
+            <button (click)="delete(firm)" mat-fab>Delete</button>
+          </mat-expansion-panel>
+         
+        </mat-accordion>
+  </mat-tab>
 
-    <br>
+  <mat-tab *ngIf="edit_firm" label="Edit">
 
-    <form *ngIf="selected_firm" (ngSubmit)="create(selected_firm)" #firmForm="ngForm">
-        <div class="form-group">
-          <label for="title">New</label>
-          <input type="text" class="form-control" id="title"
-                 required
-                 [(ngModel)]="selected_firm.title" name="title"
-                 #name="ngModel">
-        </div>
-   
-        <button type="submit" class="btn btn-success" [disabled]="!firmForm.form.valid">Submit</button>
-      </form>
-  
-  </div>
+    <mat-form-field >
+      <input [(ngModel)]="edit_firm.title" matInput placeholder="newTitle">
+    </mat-form-field>
 
-  <div class="Column">
-      <p>Id | Title</p>
-    <div  *ngFor="let customer of customers$ | async">
-        {{customer.id}} |
-        {{customer.title}}
-    </div>
-   
-  </div>
+    <button mat-button (click)="update()">Update</button>
 
-  <div class="Column">
-      <p>Id | Title</p>
-    <div  *ngFor="let product of products$ | async">
-        {{product.id}} |
-        {{product.title}}
-    </div>
-   
-  </div>
+  </mat-tab>
 
-  <div class="Column">
-      <p>Id | Title</p>
-    <div  *ngFor="let reference of references$ | async">
-        {{reference.id}} |
-        {{reference.title}}
-    </div>
-   
-  </div>
+  <mat-tab label="Create">
+      <mat-form-field>
+          <input [(ngModel)]="new_firm.title" matInput placeholder="Title">
+        </mat-form-field>
+    
+        <button mat-button (click)="create()">Create</button>
 
-</div>
+    </mat-tab>
+
+  <mat-tab label="Search">
+      <mat-form-field>
+          <input [(ngModel)]="search_firm.title" matInput placeholder="search">
+        </mat-form-field>
+    
+        <button mat-button (click)="search()">Search</button>
+
+        <mat-accordion *ngFor="let firm of search_results">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{firm.title}}
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+           
+          </mat-accordion>
+
+  </mat-tab>
+</mat-tab-group>
+

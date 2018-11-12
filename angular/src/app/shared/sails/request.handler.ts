@@ -17,19 +17,19 @@ export class RequestHandler {
   }
 
   read(req : ApiRequest): Observable<any>{
-    return this.requestService.get(req.getRequestString());
+    return this.requestService.get(req.getRequestString(true));
   }
 
   create(req : ApiRequest): Observable<any> {
-    return this.requestService.post(req.getRequestString(), req.table);
+    return this.requestService.post(req.getRequestString(false), req.table);
   }
 
   update(req : ApiRequest): Observable<any> {
-    return this.requestService.patch(req.getRequestString(), req.table);
+    return this.requestService.patch(req.getRequestString(false), req.table);
   }
 
   delete(req : ApiRequest): Observable<any>{
-    return this.requestService.delete(req.getRequestString(), req.table);
+    return this.requestService.delete(req.getRequestString(false), req.table);
   }
 
 

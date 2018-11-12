@@ -1,27 +1,63 @@
-# sails-angular-template
+# OSS Directory
 
-a [Sails v1](https://sailsjs.com) application
-
-
-### Links
-
-+ [Get started](https://sailsjs.com/get-started)
-+ [Sails framework documentation](https://sailsjs.com/documentation)
-+ [Version notes / upgrading](https://sailsjs.com/documentation/upgrading)
-+ [Deployment tips](https://sailsjs.com/documentation/concepts/deployment)
-+ [Community support options](https://sailsjs.com/support)
-+ [Professional / enterprise options](https://sailsjs.com/enterprise)
-
-
-### Version info
-
-This app was originally generated on Wed Sep 19 2018 14:11:49 GMT+0200 (Mitteleuropäische Sommerzeit) using Sails v1.0.2.
-
-<!-- Internally, Sails used [`sails-generate@1.15.28`](https://github.com/balderdashy/sails-generate/tree/v1.15.28/lib/core-generators/new). -->
+##### Table of contents
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [License](#license)
 
 
 
-<!--
-Note:  Generators are usually run using the globally-installed `sails` CLI (command-line interface).  This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.  (Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.  If you're stuck, [get help here](https://sailsjs.com/support).)
--->
 
+## Installation
+
+In order to setup, you'll first need to install:
++ [Node.js](https://nodejs.org/en/download/)
++ [Sails](https://sailsjs.com/get-started)
++ [Angular](https://angular.io/guide/quickstart)
++ [mariaDB](https://downloads.mariadb.org/) or any mysql distribution
+
+After cloning the project install the required packages:
+```bash
+cd sails-angular
+npm install
+cd angular
+npm install
+```
+### Configurations
+
+#### MySQL DB
+You can skip this section if you do not want to setup a database. Sails will use your local disc instead.   
+Make sure to comment out the database conf in conf/env/development.js  
+
+Create user and database e.g.
+
+    CREATE DATABASE `dbname`;  
+    CREATE USER 'myuser' IDENTIFIED BY 'password';
+
+    //allow access from localhost
+    GRANT USAGE ON *.* TO 'myuser'@localhost;
+
+    //grant and apply privileges
+    GRANT ALL privileges ON `dbname`.* TO 'myuser'@localhost;
+    FLUSH PRIVILGES;
+
+And set your environment configurations (config/env/):
+
+    datastores: {
+        default: {
+            adapter: 'sails-mysql',
+            url: 'mysql://myuser:password@localhost:port/dbname',
+          },
+    },
+
+## Documentation
+
+### Current Status
+
+The following is a short overview of the work in progress. For more details please consider the wiki pages.
+
+![project architecture](./doc/SoftwareArchitektur.png)
+
+## License
+
+-- Coming soon --

@@ -25,7 +25,7 @@ export class ApiRequest {
     }
 
     //creates the url for the request
-    getRequestString() : String {
+    getRequestString(withOptions : boolean) : String {
         let buffer = [];
 
         buffer.push(environment.apiURL);
@@ -38,9 +38,11 @@ export class ApiRequest {
             return buffer.join("");
         }
 
-        //if the table has no id then we create a where clause
-        this.appendWhereString(buffer);
-        this.appendRequestOptions(buffer);
+        if (withOptions) {
+            this.appendWhereString(buffer);
+            this.appendRequestOptions(buffer);
+        }
+        
 
         return buffer.join("");
     }

@@ -18,8 +18,6 @@ import { EditComponent } from './auth/edit/edit.component';
 import { ApiComponent } from './examples/api/api.component';
 import { FormsModule } from '@angular/forms';
 
-
-
 export function appInitFactory(authService: AuthService): () => Promise<any> {
   return () => authService.checkLogin().toPromise();
 }
