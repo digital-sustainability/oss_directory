@@ -15,7 +15,10 @@ module.exports = {
     url: {
       type: 'string'
     },
-
+    description: {
+      type: 'string'
+    },
+    
     //references products
     products: {
       collection: 'product',

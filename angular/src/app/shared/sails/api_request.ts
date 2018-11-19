@@ -1,4 +1,4 @@
-import { TABLES, Table } from "../oss/table";
+import { Table, TableWrapper } from "../oss/table";
 import { environment } from "../../../environments/environment";
 
 /**
@@ -14,14 +14,14 @@ import { environment } from "../../../environments/environment";
  */
 export class ApiRequest {
 
-    private limit : number;
+    public limit : number;
     private skip : number;
     private pagination_number : number;
     private current_page : number;
-    public table : Table;
+    public table : TableWrapper;
 
     constructor(table : Table){
-        this.table = table;
+        this.table = new TableWrapper(table);
     }
 
     //creates the url for the request
@@ -30,20 +30,17 @@ export class ApiRequest {
 
         buffer.push(environment.apiURL);
         buffer.push("api/");
-        buffer.push(this.table.getTableName());
+        buffer.push(this.table.getName());
         buffer.push("/");
 
-        if (this.table.getTableId()){ //if the table entry already has an id then we create a findOne request url
-            buffer.push(this.table.getTableId());
+        if (this.table.getId()){ //if the table entry already has an id then we create a findOne request url
+            buffer.push(this.table.getId());
             return buffer.join("");
         }
-
         if (withOptions) {
             this.appendWhereString(buffer);
             this.appendRequestOptions(buffer);
         }
-        
-
         return buffer.join("");
     }
 
@@ -64,9 +61,10 @@ export class ApiRequest {
      */
     private appendWhereString(buffer : Array<String>){
         let where = {};
-        for (let prop in this.table){
-            if (this.table.hasOwnProperty(prop) && prop != "table_name") {
-                where[prop] = {"contains": this.table[prop]};
+        let entry = this.table.getEntry();
+        for (let prop in entry){
+            if (entry.hasOwnProperty(prop)) {
+                where[prop] = { "contains" : entry[prop]};
             }
         }
         if (Object.keys(where).length > 0) {

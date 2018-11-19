@@ -15,6 +15,12 @@ module.exports = {
     url: {
       type: 'string'
     },
+    category_uid: {
+      type: 'number'
+    },
+    description: {
+      type: 'string'
+    },
 
     //product is referenced
     references: {

@@ -1,13 +1,14 @@
-import { Table, TABLES } from './table';
+import { Table } from './table';
+import { Reference } from './reference';
+import { Product } from './product';
+import { Customer } from './customer';
 
 export class Firm extends Table {
-    
-    table_name : TABLES = TABLES.FIRM;
 
     public constructor(){
         super();
     }
-
+    
     title: string;
     url: string;
     contact_name : string;
@@ -19,19 +20,7 @@ export class Firm extends Table {
     city: string;
     description: string;
 
-    deserialize(input) : Firm{
-        let firm : Firm = new Firm();
-        firm.id = input.id;
-        firm.title = input.title;
-        firm.url = input.url;
-        firm.contact_name = input.contact_name;
-        firm.contact_email = input.contact_email;
-        firm.contact_phone = input.contact_phone;
-        firm.address = input.address;
-        firm.address2 = input.address2;
-        firm.zip = input.zip;
-        firm.city = input.city;
-        firm.description = input.description;
-        return firm;
-    }
+    services : number[];
+    customers : number[];
+    references : number[];
 }
