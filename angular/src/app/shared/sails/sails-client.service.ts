@@ -3,7 +3,7 @@ import { SailsService } from 'angular2-sails';
 import { pipe, Observable } from 'rxjs';
 import { CsrfService } from '../auth/csrf.service';
 import { mergeMap, map } from '../../../../node_modules/rxjs/operators';
-import { RequestService } from './request.interface';
+import { RequestService } from './request/request.interface';
 
 @Injectable({
   providedIn: 'root'

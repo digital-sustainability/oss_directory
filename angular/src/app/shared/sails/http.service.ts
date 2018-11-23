@@ -4,7 +4,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, pipe, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { map, catchError } from 'rxjs/operators';
-import { RequestService } from './request.interface';
+import { RequestService } from './request/request.interface';
 
 
 @Injectable({
