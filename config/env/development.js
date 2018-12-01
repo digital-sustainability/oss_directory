@@ -33,7 +33,7 @@ module.exports = {
             adapter: 'sails-mysql',
 
             //your env connection 
-            url: 'mysql://oss:oss@localhost:3306/database',
+             url: (process.env.OSS_DIRECTORY_URL || require('./local.js').OSS_DIRECTORY_URL),
         
           },
     
