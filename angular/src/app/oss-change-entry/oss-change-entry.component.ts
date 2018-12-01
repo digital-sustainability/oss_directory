@@ -79,20 +79,6 @@ export class OssChangeEntryComponent implements OnInit {
   }
 
   getFirm(): void {
-    this.firms_obs = this.reqHandler.read(this.firm_req).pipe(
-      map((data) => {
-        this.firms = [];
-        let d = data.map((item) => {
-          let f = new Firm().deserialize(item);
-          this.firms.push(f);
-          return f;
-        });
-        return d;
-
-      }));
-    this.firms_obs.subscribe();
-    this.new_firm = this.firms.find(item => item.title === this.route.snapshot.paramMap.get('id').toString());
-    console.log(this.new_firm);
 
   }
 
