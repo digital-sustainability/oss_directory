@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { OssListComponent } from './oss-list/oss-list.component';
 import { OssDetailViewComponent } from './oss-detail-view/oss-detail-view.component';
 import { OssChangeEntryComponent } from './oss-change-entry/oss-change-entry.component';
+import { MatStepperModule, MatInputModule, MatButtonModule, MatAutocompleteModule } from '@angular/material';
 
 export function appInitFactory(authService: AuthService): () => Promise<any> {
   return () => authService.checkLogin().toPromise();
@@ -47,6 +48,10 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
     SailsModule.forRoot(),
     HttpClientModule,
     FormsModule,
+    MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
+    MatAutocompleteModule,
   ],
   providers: [
     {

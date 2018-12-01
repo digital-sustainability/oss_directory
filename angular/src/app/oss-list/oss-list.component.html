@@ -1,3 +1,18 @@
-<p>
-  oss-list works!
-</p>
+<mat-card>
+  <mat-card-title>OSS Firmen</mat-card-title>
+  <mat-card-subtitle>Hier finden Sie alle OSS Firmen</mat-card-subtitle>
+  <a href="./create" class="mat-button">Neue Firma</a>
+  <mat-card-content>
+    <mat-accordion *ngFor="let firm of firms">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{firm.title}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{firm.description}}</p>
+        <a [routerLink]="['/details', firm.getId()]">Firma ändern</a>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>
