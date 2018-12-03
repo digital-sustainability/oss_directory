@@ -95,11 +95,25 @@ module.exports = {
         return 'emailAlreadyInUse'
       });
 
+    
+
+    /*
+
+    //TODO: Integrate Mail Service
+    
     //Send confirm email
     var content = `Successfully registered. Please click on the link below to confirm your email address: <br> 
        ${sails.config.custom.baseUrl}/register/confirm?user_id=${user.id}&token=${user.confirm_token}`;
     
     await sails.helpers.mail.send('Successfully registered', content, user.email);
+
+    */
+
+    //for now just set confirm to true
+
+    await User.update({ id: user.id}).set({
+      confirmed: true
+    });
 
     return exits.success(user);
   }

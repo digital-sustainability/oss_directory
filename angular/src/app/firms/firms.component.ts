@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {RequestHandler} from "../shared/sails/request.handler";
+import {RequestHandler} from "../shared/sails/request/request.handler";
 import {Observable} from "rxjs";
 import {Firm} from "../shared/oss/firm";
 import {Product} from "../shared/oss/product";
 import {HttpService} from "../shared/sails/http.service";
-import {ApiRequest} from "../shared/sails/api_request";
-import {TableWrapper} from "../shared/oss/table";
+import {Table} from "../shared/oss/table";
 import {MatDialog} from "@angular/material";
 import {OssChangeEntryComponent} from "../oss-change-entry/oss-change-entry.component";
+import {Request} from "../shared/sails/request/request";
 
 @Component({
   selector: 'app-firms',
@@ -30,10 +30,12 @@ export class FirmsComponent implements OnInit {
   }
 
   ngOnInit() {
-    let firm_req = new ApiRequest(new Firm());
-    this.firms_obs = this.reqHandler.read(firm_req, this.firms);
+    let firm_req = new Request(new Firm());
+    this.firms_obs = this.reqHandler.read(firm_req);
 
-    this.firms_obs.subscribe();
+    this.firms_obs.subscribe( data => {
+      this.firms = data;
+    });
   }
 
   openDialog(): void {

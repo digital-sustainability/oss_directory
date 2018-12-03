@@ -9,7 +9,6 @@
  * https://sailsjs.com/config/bootstrap
  */
 
-
 module.exports.bootstrap = async function(done) {
 
   // By convention, this is a good place to set up fake data during development.
@@ -28,10 +27,6 @@ module.exports.bootstrap = async function(done) {
   // ]);
   // ```
   
-  await Customer.destroy({});
-  await Firm.destroy({});
-  await Product.destroy({});
-  await Reference.destroy({});
 
   await Customer.createEach([
     { title: 'customer1', url: 'www.customer1.ch', isClientOf: [1,2], references: [1]},
@@ -66,6 +61,25 @@ module.exports.bootstrap = async function(done) {
     { title: 'reference6'},
     { title: 'reference7'},
   ]);
+
+  await Permission.createEach([
+    { name: 'create'},
+    { name: 'update'}
+  ]);
+
+  await Role.createEach([
+    { name: 'test', permissions: [1,2]}
+  ]);
+
+  await Action.createEach([
+    { path: '/api/firm/', method: 'post', permissions: [1]}
+  ]);
+
+  await User.createEach([
+    { first_name: 'Steve', last_name: 'Mürset', email: 'steve.muerset@iwi.unibe.ch', password: 'asdfg12345', confirmed: true, confirm_token: 'asdf', role: 1 }
+  ]);
+
+
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)

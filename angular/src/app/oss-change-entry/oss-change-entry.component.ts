@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormArray, FormControl} from '@angular/forms';
 import {MatStepperModule} from '@angular/material';
 import {Firm} from "../shared/oss/firm";
-import {ApiRequest} from "../shared/sails/api_request";
-import {RequestHandler} from "../shared/sails/request.handler";
+import {RequestHandler} from "../shared/sails/request/request.handler";
 import {HttpService} from "../shared/sails/http.service";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
+import {Request} from "../shared/sails/request/request";
+
 
 @Component({
   selector: 'app-oss-change-entry',
@@ -28,7 +29,7 @@ export class OssChangeEntryComponent implements OnInit {
   private firms_obs : Observable<Firm[]>;
   private firms : Firm[] = [];
   private edit_firm : Firm = new Firm();
-  private firm_req = new ApiRequest(new Firm());
+  private firm_req = new Request(new Firm());
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -75,12 +76,12 @@ export class OssChangeEntryComponent implements OnInit {
     this.new_firm.city = this.secondFormGroup.controls.city.value;
 
     console.log(this.new_firm);
-    let req = new ApiRequest(this.new_firm);
+    let req = new Request(this.new_firm);
     let observable = this.reqHandler.create(req);
     observable.subscribe((res) => {
       this.firm = res;
       console.log(res);
-      this.router.navigate(['/details/'+ this.firm.getId()]);
+      this.router.navigate(['/details/'+ this.firm.id]);
     });
   }
 

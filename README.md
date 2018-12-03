@@ -52,12 +52,18 @@ And set your environment configurations (config/env/):
 
 ## Documentation
 
-### Current Status
+-- Comming soon --
 
-The following is a short overview of the work in progress. For more details please consider the wiki pages.
-
-![project architecture](./doc/SoftwareArchitektur.png)
+### Big Picture
+![project architecture](./doc/Container_Diagram.jpg)
 
 ## License
 
--- Coming soon --
+GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+Copyright (C) 2007 Free Software Foundation, Inc. https://fsf.org/
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+
+

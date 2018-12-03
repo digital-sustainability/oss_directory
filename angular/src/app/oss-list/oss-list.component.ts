@@ -1,12 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {RequestHandler} from "../shared/sails/request.handler";
+import {RequestHandler} from "../shared/sails/request/request.handler";
 import {Observable} from "rxjs";
 import {Firm} from "../shared/oss/firm";
-import {ApiRequest} from "../shared/sails/api_request";
 import {HttpService} from "../shared/sails/http.service";
 import {map} from "rxjs/operators";
-import {Table, TableWrapper} from "../shared/oss/table";
+import {Table} from "../shared/oss/table";
 import {Product} from "../shared/oss/product";
+import {Request} from "../shared/sails/request/request";
+
 
 @Component({
   selector: 'app-oss-list',
@@ -44,8 +45,8 @@ export class OssListComponent implements OnInit {
   }
 
   search() : void {
-    let req = new ApiRequest(this.search_data);
-    this.data_obs = this.reqHandler.read(req, this.data);
+    let req = new Request(this.search_data);
+    this.data_obs = this.reqHandler.read(req);
     this.refreshData();
   }
 }

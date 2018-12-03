@@ -31,7 +31,7 @@
             </mat-expansion-panel>
            
 
-          <mat-expansion-panel *ngFor="let firm of firms" (opened)="edit_firm = firm" [expanded]="edit_firm.getId() == firm.getId()">
+          <mat-expansion-panel *ngFor="let firm of firms" (opened)="edit_firm = firm" [expanded]="edit_firm.id == firm.id">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 {{firm.title}}

@@ -1,8 +1,8 @@
 <h1>
   {{firm.title}}
 </h1>
-<p>{{firm.getId()}}</p>
+<p>{{firm.id}}</p>
 <p>{{firm.description}}</p>
-<button mat-button [routerLink]="['/update', firm.getId()]">Ändern</button>
+<button mat-button [routerLink]="['/update', firm.id]">Ändern</button>
 
 <app-oss-list [data]="customers"></app-oss-list>
