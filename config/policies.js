@@ -17,11 +17,5 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
-  'UserController': {
-    '*': 'isAuthenticated',
-    'create': true,
-    'update': ['isAuthenticated', 'updateUser']
-  },
-
+  '*': 'authorize'
 };

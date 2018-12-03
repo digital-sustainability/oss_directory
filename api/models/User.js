@@ -60,6 +60,10 @@ module.exports = {
       type: 'string',
       allowNull: true
     },
+
+    role: {
+      model: 'role'
+    }
   },
 
   customToJSON: function() {
