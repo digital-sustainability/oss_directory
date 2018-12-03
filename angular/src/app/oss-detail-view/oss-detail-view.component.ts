@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 import {RequestHandler} from "../shared/sails/request.handler";
 import {Observable} from "rxjs";
 import {HttpService} from "../shared/sails/http.service";
+import {SailsClientService} from "../shared/sails/sails-client.service";
 
 @Component({
   selector: 'app-oss-detail-view',
@@ -16,12 +17,9 @@ export class OssDetailViewComponent implements OnInit {
 
   private reqHandler : RequestHandler;
 
-  private firms_obs : Observable<Firm[]>;
-  protected firm : Firm;
-  private edit_firm : Firm = new Firm();
-  private search_firm : Firm = new Firm();
-  private search_results : Firm[] = [];
-  private firm_req = new ApiRequest(new Firm());
+  protected firms : Firm[];
+  protected firm : Firm = new Firm();
+  protected customers;
 
   constructor(
     private httpService : HttpService,
@@ -32,7 +30,10 @@ export class OssDetailViewComponent implements OnInit {
   ngOnInit() {
     const id = +this.route.snapshot.params["id"];
 
-
+    let firm_req = new ApiRequest(new Firm());
+    this.reqHandler.read(firm_req, this.firms).subscribe(data => {
+      this.firm = data.find( firm => firm.id === id);
+      this.customers = this.firm.customers;
+    });
   }
-
 }

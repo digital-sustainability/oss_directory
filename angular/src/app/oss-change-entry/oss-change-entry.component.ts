@@ -7,7 +7,7 @@ import {RequestHandler} from "../shared/sails/request.handler";
 import {HttpService} from "../shared/sails/http.service";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-oss-change-entry',
@@ -19,6 +19,7 @@ export class OssChangeEntryComponent implements OnInit {
   private reqHandler : RequestHandler;
 
   protected new_firm : Firm = new Firm();
+  firm: Firm;
   items: FormArray;
   form: FormGroup;
   isLinear = false;
@@ -33,6 +34,7 @@ export class OssChangeEntryComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private httpService : HttpService,
     private route: ActivatedRoute,
+    private router: Router
   ) {
     this.reqHandler = new RequestHandler(httpService)
   }
@@ -75,7 +77,11 @@ export class OssChangeEntryComponent implements OnInit {
     console.log(this.new_firm);
     let req = new ApiRequest(this.new_firm);
     let observable = this.reqHandler.create(req);
-    observable.subscribe((res) => {});
+    observable.subscribe((res) => {
+      this.firm = res;
+      console.log(res);
+      this.router.navigate(['/details/'+ this.firm.getId()]);
+    });
   }
 
   getFirm(): void {

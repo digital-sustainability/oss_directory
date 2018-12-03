@@ -1,16 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar color="primary">
-
-  <h1>{{title}}</h1>
-  <div fxFlex="1 1 auto"></div>
-  <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-  <a mat-button routerLink="/example" routerLinkActive="active">Beispiel</a>
-  <a mat-button routerLink="/firmen" routerLinkActive="active">OSS Firmen</a>
-  <a *ngIf="!authenticated" mat-button routerLink="/login" routerLinkActive="active">Login</a>
-  <a *ngIf="!authenticated" mat-button routerLink="/register" routerLinkActive="active">Register</a>
-  <a *ngIf="authenticated" mat-button routerLink="/user/edit" routerLinkActive="active">Edit user</a>
-  <a *ngIf="authenticated" mat-button (click)="logout()">Logout</a>
-</mat-toolbar>
+<app-navbar></app-navbar>
 
 <div class="mat-typography">
     

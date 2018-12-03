@@ -10,6 +10,9 @@ import { EditComponent } from './auth/edit/edit.component';
 import { ApiComponent } from './examples/api/api.component';
 import {OssChangeEntryComponent} from "./oss-change-entry/oss-change-entry.component";
 import {OssListComponent} from "./oss-list/oss-list.component";
+import {OssDetailViewComponent} from "./oss-detail-view/oss-detail-view.component";
+import {FirmsComponent} from "./firms/firms.component";
+import {ProductsComponent} from "./products/products.component";
 
 const routes: Routes = [
 
@@ -37,14 +40,14 @@ const routes: Routes = [
 
   {
     path: 'firmen',
-    component: OssListComponent,
+    component: FirmsComponent,
     pathMatch: 'full',
     data: {state: 'home'}
   },
 
   {
-    path: 'create',
-    component: OssChangeEntryComponent,
+    path: 'produkte',
+    component: ProductsComponent,
     pathMatch: 'full',
     data: {state: 'home'}
   },
@@ -52,6 +55,16 @@ const routes: Routes = [
   {
     path: 'update/:id',
     component: OssChangeEntryComponent,
+  },
+
+  {
+    path: 'create',
+    component: OssChangeEntryComponent,
+  },
+
+  {
+    path: 'details/:id',
+    component: OssDetailViewComponent,
   },
 
     /*

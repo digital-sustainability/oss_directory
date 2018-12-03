@@ -21,6 +21,9 @@ import { OssListComponent } from './oss-list/oss-list.component';
 import { OssDetailViewComponent } from './oss-detail-view/oss-detail-view.component';
 import { OssChangeEntryComponent } from './oss-change-entry/oss-change-entry.component';
 import { MatStepperModule, MatInputModule, MatButtonModule, MatAutocompleteModule } from '@angular/material';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FirmsComponent } from './firms/firms.component';
+import { ProductsComponent } from './products/products.component';
 
 export function appInitFactory(authService: AuthService): () => Promise<any> {
   return () => authService.checkLogin().toPromise();
@@ -38,7 +41,10 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
     ApiComponent,
     OssListComponent,
     OssDetailViewComponent,
-    OssChangeEntryComponent
+    OssChangeEntryComponent,
+    NavbarComponent,
+    FirmsComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

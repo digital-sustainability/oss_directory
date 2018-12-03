@@ -1,3 +1,8 @@
-<p>
-  oss-detail-view works!
-</p>
+<h1>
+  {{firm.title}}
+</h1>
+<p>{{firm.getId()}}</p>
+<p>{{firm.description}}</p>
+<button mat-button [routerLink]="['/update', firm.getId()]">Ändern</button>
+
+<app-oss-list [data]="customers"></app-oss-list>

@@ -1,0 +1,30 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!--<mat-sidenav-container class="sidenav">
+  <mat-sidenav #sidenav mode="side">
+    Sidenav content
+      <ul class="sidenav-menu">
+        <li><a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li><a mat-button routerLink="/example" routerLinkActive="active">Beispiel</a></li>
+        <li><a mat-button routerLink="/firmen" routerLinkActive="active">OSS Firmen</a></li>
+        <li><a mat-button routerLink="/produkte" routerLinkActive="active">OSS Produkte</a></li>
+        <li><a *ngIf="!authenticated" mat-button routerLink="/login" routerLinkActive="active">Login</a></li>
+        <li><a *ngIf="!authenticated" mat-button routerLink="/register" routerLinkActive="active">Register</a></li>
+        <li><a *ngIf="authenticated" mat-button routerLink="/user/edit" routerLinkActive="active">Edit user</a></li>
+        <li><a *ngIf="authenticated" mat-button (click)="logout()">Logout</a>
+      </ul>
+  </mat-sidenav>
+</mat-sidenav-container>-->
+<mat-toolbar color="primary">
+
+  <!--<button mat-button (click)="sidenav.toggle()"><i class="material-icons">menu</i></button>-->
+  <h1>OSS Directory</h1>
+  <div fxFlex="1 1 auto"></div>
+  <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+  <a mat-button routerLink="/example" routerLinkActive="active">Beispiel</a>
+  <a mat-button routerLink="/firmen" routerLinkActive="active">OSS Firmen</a>
+  <a mat-button routerLink="/produkte" routerLinkActive="active">OSS Produkte</a>
+  <a *ngIf="!authenticated" mat-button routerLink="/login" routerLinkActive="active">Login</a>
+  <a *ngIf="!authenticated" mat-button routerLink="/register" routerLinkActive="active">Register</a>
+  <a *ngIf="authenticated" mat-button routerLink="/user/edit" routerLinkActive="active">Edit user</a>
+  <a *ngIf="authenticated" mat-button (click)="logout()">Logout</a>
+</mat-toolbar>
