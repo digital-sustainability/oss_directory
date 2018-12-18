@@ -44,7 +44,7 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
     OssChangeEntryComponent,
     NavbarComponent,
     FirmsComponent,
-    ProductsComponent
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,

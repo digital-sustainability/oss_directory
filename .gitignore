@@ -132,3 +132,5 @@ lib-cov
 
 *package-lock.json
 *documentation/
+.vscode
+local.js
