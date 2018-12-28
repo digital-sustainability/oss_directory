@@ -101,6 +101,11 @@ const routes: Routes = [
     OSS Implementation
 
     */
+
+    {
+      path: 'content',
+      loadChildren: './modules/viewer/viewer.module#ViewerModule'
+    },
 ];
 
 @NgModule({

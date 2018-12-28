@@ -24,6 +24,7 @@ import { MatStepperModule, MatInputModule, MatButtonModule, MatAutocompleteModul
 import { NavbarComponent } from './navbar/navbar.component';
 import { FirmsComponent } from './firms/firms.component';
 import { ProductsComponent } from './products/products.component';
+import { ViewerModule } from './modules/viewer/viewer.module';
 
 export function appInitFactory(authService: AuthService): () => Promise<any> {
   return () => authService.checkLogin().toPromise();
@@ -58,6 +59,7 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
     MatInputModule,
     MatButtonModule,
     MatAutocompleteModule,
+    ViewerModule,
   ],
   providers: [
     {
