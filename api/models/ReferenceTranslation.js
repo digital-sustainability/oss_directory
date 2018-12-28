@@ -7,15 +7,19 @@
 
 module.exports = {
 
-  tableName: 'reference',
+  tableName: 'reference_translation',
   attributes: {
-    title: {
+   
+    language : { type : 'string', defaultsTo : 'EN',},
+    url: {
       type: 'string'
     },
+    description: {
+      type: 'string', columnType: 'text',
+    },
 
-    translations : {
-      collection : 'referencetranslation',
-      via : 'reference',
+    reference : {
+      model : 'reference',
     }
   }
 
