@@ -43,15 +43,7 @@ module.exports.bootstrap = async function (done) {
     { title : 'Elastic', street : 'nutmegstreet', house_number : 505, additional : '', city : 'Mountain View', zip : '5050', state : 'California'},
   ]);
 
-  await Organisation.createEach([
-    { title : 'Adobe', address : 1},
-    { title : 'Confluent', address : 2},
-    { title : 'Databricks', address : 3},
-    { title : 'Docker', address : 4},
-    { title : 'Elastic', address : 5},
-  ]);
-
-  await OrganisationTranslation.createEach([
+  await VendorTranslation.createEach([
     { language : 'EN', description : `Adobe has a strong commitment to open source and has more than 250 public repositories on its GitHub site. 
     Some of its best-known open source projects are developer tools like the PhoneGap web development framework, 
     the Brackets text editor and the Topcoat CSS library. Adobe staff also contribute regularly to other open source projects like 
@@ -78,19 +70,14 @@ module.exports.bootstrap = async function (done) {
   ]);
   
   await Vendor.createEach([
-    { organisation : 1,},
-    { organisation : 2,},
-    { organisation : 3,},
-    { organisation : 4,},
-    { organisation : 5,},
+    { title : 'Adobe', address : 1, translations : [1]},
+    { title : 'Confluent', address : 2, translations : [2]},
+    { title : 'Databricks', address : 3, translations : [3]},
+    { title : 'Docker', address : 4, translations : [4]},
+    { title : 'Elastic', address : 5, translations : [5]},
   ]);
-  await Client.createEach([
-    { organisation : 1,},
-    { organisation : 2,},
-    { organisation : 3,},
-    { organisation : 4,},
-    { organisation : 5,},
-  ]);
+
+
   await Product.createEach([
     { title : 'RedHat',},
     { title : 'Linux',},
@@ -102,62 +89,6 @@ module.exports.bootstrap = async function (done) {
     { title : 'Sails',},
     { title : 'RubyOnRails',},
   ]);
-
-
-
-
-  // await Customer.createEach([
-  //   { title: 'customer1', url: 'www.customer1.ch', isClientOf: [1,2], references: [1]},
-  //   { title: 'customer2', url: 'www.customer2.ch', isClientOf: [1,2]},
-  //   { title: 'customer3', url: 'www.customer3.ch', isClientOf: [1,2]},
-  //   { title: 'customer4', url: 'www.customer4.ch', isClientOf: [1,2]},
-  //   { title: 'customer5', url: 'www.customer5.ch', isClientOf: [1,2]}
-  // ]);
-
-  // await Firm.createEach([
-  //   { id: 1, title: 'firm1', url: 'www.firm1.ch', services: [1,2,3], references: [1]},
-  //   { id: 2, title: 'firm2', url: 'www.firm2.ch', services: [1,2,3], references: [2]},
-  //   { title: 'firm3', url: 'www.firm3.ch', services: [1,2,3], references: [3]},
-  //   { title: 'firm4', url: 'www.firm4.ch', services: [1,2,3], references: [4]},
-  //   { title: 'firm5', url: 'www.firm5.ch', customers: [3,4], services: [1,2,3], references: []},
-  // ]);
-
-  // await Product.createEach([
-  //   { title: 'product1', providers: [1,3], references: [2,1]},
-  //   { title: 'product2', providers: [1,4], references: [3]},
-  //   { title: 'product3', providers: [2,3], references: [1]},
-  //   { title: 'product4', providers: [4,3], references: [2]},
-  //   { title: 'product5', providers: [2,4], references: [4]},
-  // ]);
-
-  // await Reference.createEach([
-  //   { title: 'reference1'},
-  //   { title: 'reference2'},
-  //   { title: 'reference3'},
-  //   { title: 'reference4'},
-  //   { title: 'reference5'},
-  //   { title: 'reference6'},
-  //   { title: 'reference7'},
-  // ]);
-
-  // await Permission.createEach([
-  //   { name: 'create'},
-  //   { name: 'update'}
-  // ]);
-
-  // await Role.createEach([
-  //   { name: 'test', permissions: [1,2]}
-  // ]);
-
-  // await Action.createEach([
-  //   { path: '/api/firm/', method: 'post', permissions: [1]}
-  // ]);
-
-  // await User.createEach([
-  //   { first_name: 'Steve', last_name: 'Mürset', email: 'steve.muerset@iwi.unibe.ch', password: 'asdfg12345', confirmed: true, confirm_token: 'asdf', role: 1 }
-  // ]);
-
-
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)

@@ -61,6 +61,8 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
     MatAutocompleteModule,
     ViewerModule,
   ],
+  exports: [
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

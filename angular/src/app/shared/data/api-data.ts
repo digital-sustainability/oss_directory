@@ -1,7 +1,13 @@
-import { Deserializer } from './deserializer';
+
 export class ApiData {
 
-    constructor(input? : any){
-        Deserializer.deserialize(input, this);
+    public id : string;
+
+    constructor(input? : any){}
+
+     //class name corresponds with db model!
+    public getName() : String 
+    {
+        return this.constructor.name;
     }
 }

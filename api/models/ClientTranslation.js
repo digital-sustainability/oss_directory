@@ -1,7 +1,7 @@
 
 module.exports = {
 
-  tableName: 'actions',
+  tableName: 'client_translation',
   attributes: {
 
     client : {

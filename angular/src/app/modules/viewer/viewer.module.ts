@@ -15,7 +15,13 @@ import { ProductDetailComponent } from '../../views/product/product-detail/produ
 import { ReferenceListComponent } from '../../views/reference/reference-list/reference-list.component';
 import { ReferenceListItemComponent } from '../../views/reference/reference-list-item/reference-list-item.component';
 import { ReferenceDetailComponent } from '../../views/reference/reference-detail/reference-detail.component';
-import { EditorModule } from '../editor/editor.module';
+//import { EditorModule } from '../editor/editor.module';
+import { ActivatedRoute } from '@angular/router';
+import { DataProviderService } from '../../shared/data/data-provider.service';
+import { HttpClient } from 'selenium-webdriver/http';
+import { RequestService } from '../../shared/data/request.service';
+import { HttpService } from '../../shared/sails/http.service';
+import { ApiUrl } from '../../shared/url/api-url';
 
 
 /**
@@ -28,7 +34,7 @@ import { EditorModule } from '../editor/editor.module';
   imports: [
     CommonModule,
     ViewerRoutingModule,
-    EditorModule,
+    //EditorModule,
   ],
   declarations: [
     ListComponent,
@@ -43,6 +49,10 @@ import { EditorModule } from '../editor/editor.module';
     ReferenceListComponent,
     ReferenceListItemComponent,
     ReferenceDetailComponent,
-  ]
+  ],
+  providers: [
+    DataProviderService,
+    ApiUrl,
+  ],
 })
 export class ViewerModule { }

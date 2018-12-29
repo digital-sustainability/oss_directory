@@ -1,5 +1,5 @@
 import { ApiData } from "../data/api-data";
 
-export class product extends ApiData{
+export class Product extends ApiData{
 
 }

@@ -10,19 +10,19 @@ const routes: Routes = [
     component: ListComponent,
   },
   {
-    path: ':data',
+    path: ':type',
     component: ListComponent
   },
   {
-    path: ':data/new',
+    path: ':type/new',
     loadChildren: '../editor/editor.module#EditorModule'
   },
   {
-    path: ':data/:id',
+    path: ':type/:id',
     component: DetailComponent
   },
   {
-    path: ':data/:id/edit',
+    path: ':type/:id/edit',
     loadChildren: '../editor/editor.module#EditorModule'
   },
 ];

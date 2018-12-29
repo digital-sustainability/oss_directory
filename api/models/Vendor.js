@@ -4,16 +4,17 @@ module.exports = {
   tableName: 'vendor',
   attributes: {
 
+    title : { type : 'string',} ,
+
     translations : {
       collection : 'vendortranslation',
       via : 'vendor',
     },
 
-    organisation : {
-      model : 'organisation',
-      unique : true,
+    address : {
+      collection : 'address',
+      via : 'vendor',
     }
-
   }
 };
 

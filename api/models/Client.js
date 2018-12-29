@@ -1,20 +1,15 @@
 
 module.exports = {
 
-  tableName: 'actions',
+  tableName: 'client',
   attributes: {
+
+    title : { type : 'string',} ,
 
     translations : {
       collection : 'clienttranslation',
       via : 'client'
     },
-
-    organisation : {
-      model : 'organisation',
-      unique : true
-    },
-
-
 
   }
 };
