@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../../shared/user/user';
+import { User } from '../../../shared/user/user';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -5,6 +5,8 @@ import { ApiData } from '../../../shared/data/api-data';
 import { map, switchMap } from 'rxjs/operators';
 import { Deserializer } from '../../../shared/data/deserializer';
 import { Observable, empty, of, never } from 'rxjs';
+import { ApiDataProxy } from '../../../shared/data/api-data-proxy';
+import { RequestService } from '../../../shared/data/request.service';
 
 @Component({
   selector: 'app-form',
@@ -18,7 +20,8 @@ export class FormComponent implements OnInit {
 
   constructor(
     private route : ActivatedRoute, 
-    private provider : DataProviderService) { 
+    private provider : DataProviderService,
+    private req : RequestService) { 
 
     }
 
@@ -45,8 +48,21 @@ export class FormComponent implements OnInit {
     
   }
 
-  private submit($event) {
-    console.log($event);
+  private submit($event?) {
+
+    let proxy = new ApiDataProxy(this.req, this.data);
+    if (this.data.id)
+    {
+      console.log("update");
+      proxy.update().subscribe();
+    }
+    else 
+    {
+      console.log("create")
+      proxy.create().subscribe();
+    }
+    
+
     console.log("clicked");
   }
 }

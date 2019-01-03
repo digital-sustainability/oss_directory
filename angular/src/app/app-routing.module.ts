@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { OnlyLoggedInGuard } from './shared/auth/only-logged-in.guard';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { RegisterSuccessfulComponent } from './auth/register-successful/register-successful.component';
-import { RegisterConfirmComponent } from './auth/register-confirm/register-confirm.component';
-import { EditComponent } from './auth/edit/edit.component';
+import { LoginComponent } from './views/auth/login/login.component';
+import { RegisterComponent } from './views/auth/register/register.component';
+import { RegisterSuccessfulComponent } from './views/auth/register-successful/register-successful.component';
+import { RegisterConfirmComponent } from './views/auth/register-confirm/register-confirm.component';
+import { EditComponent } from './views/auth/edit/edit.component';
 import { ApiComponent } from './examples/api/api.component';
 import {OssChangeEntryComponent} from "./oss-change-entry/oss-change-entry.component";
 import {OssListComponent} from "./oss-list/oss-list.component";
@@ -67,7 +67,7 @@ const routes: Routes = [
     component: OssDetailViewComponent,
   },
 
-    /*
+    
     {
         path: 'login',
         component: LoginComponent,
@@ -94,7 +94,7 @@ const routes: Routes = [
         component: EditComponent
     }
 
-    */
+    
 
     /*
 

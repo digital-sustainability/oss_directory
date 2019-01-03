@@ -19,5 +19,4 @@ export class DetailComponent implements OnInit {
     this.provider.type(this.route).subscribe(type => this.type = type);
     this.provider.getData(this.route).subscribe(data => this.data = data);
   }
-
 }

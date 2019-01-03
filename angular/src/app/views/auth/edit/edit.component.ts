@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '../../../../node_modules/@angular/forms';
-import { User } from '../../shared/user/user';
-import { NavigationExtras, Router } from '../../../../node_modules/@angular/router';
-import { AuthService } from '../../shared/auth/auth.service';
-import { MatSnackBar } from '../../../../node_modules/@angular/material';
-import { initChangeDetectorIfExisting } from '../../../../node_modules/@angular/core/src/render3/instructions';
+import { FormGroup, FormControl, Validators } from '../../../../../node_modules/@angular/forms';
+import { User } from '../../../shared/user/user';
+import { NavigationExtras, Router } from '../../../../../node_modules/@angular/router';
+import { AuthService } from '../../../shared/auth/auth.service';
+import { MatSnackBar } from '../../../../../node_modules/@angular/material';
+import { initChangeDetectorIfExisting } from '../../../../../node_modules/@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-edit',
