@@ -13,6 +13,10 @@ export class ApiUrl {
         this.addEnvironment(buffer);
         this.addModel(buffer, data);
 
+        if (data.id){
+            this.addId(buffer, data);
+        }
+
         return buffer.join("");
     }
 

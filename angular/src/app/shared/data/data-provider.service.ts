@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { ApiData } from './api-data';
 import { Deserializer } from './deserializer';
 import { ApiDataProxy } from './api-data-proxy';
 import { RequestService } from './request.service';
@@ -12,11 +11,14 @@ import { RequestService } from './request.service';
 })
 
 export class DataProviderService {
+
+    private currentData : any;
+    private historyData : Array<any>;
     
     constructor(
         private req : RequestService){}
 
-    public getData(route : ActivatedRoute) : Observable<ApiData> {
+    public getData(route : ActivatedRoute) : Observable<any> {
 
         return route.params.pipe(
             map( (params) => this.resolveParams(params)),
@@ -30,7 +32,7 @@ export class DataProviderService {
         );
     }
 
-    private resolveParams(params) : ApiDataProxy {
+    public resolveParams(params) : ApiDataProxy {
 
         let type = params['type'];
         let id = params['id'];
@@ -43,4 +45,15 @@ export class DataProviderService {
         }
         return proxy;
     }
+
+
+    public type(route : ActivatedRoute) : Observable<string> {
+        return route.params.pipe(map(params => params['type']));
+    }
+
+    public id(route : ActivatedRoute) : Observable<string> {
+        return route.params.pipe(map(params => params['id']));
+    }
+
+
 }

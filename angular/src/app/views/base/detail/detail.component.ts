@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DataProviderService } from '../../../shared/data/data-provider.service';
 
 @Component({
   selector: 'app-detail',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
-  constructor() { }
+  private data;
+  private type;
+
+  constructor(private route : ActivatedRoute, 
+    private provider : DataProviderService) { }
 
   ngOnInit() {
+    this.provider.type(this.route).subscribe(type => this.type = type);
+    this.provider.getData(this.route).subscribe(data => this.data = data);
   }
 
 }

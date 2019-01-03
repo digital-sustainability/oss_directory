@@ -8,7 +8,7 @@ export class Deserializer{
 
 
     public static createNew(name : string) : ApiData {
-
+        name = name.toLowerCase();
         switch (name) {
             case DataTypes.Client:
                 return new Client();
@@ -24,9 +24,12 @@ export class Deserializer{
     }
 
     public static deserialize(data : ApiData, input : any) {
-
+        for (let prop in input)
+        {
+            data[prop] = input[prop];
+        }
+        return data;
     }
-
 }
 
 

@@ -1,3 +1,7 @@
-<p>
-  list works!
-</p>
+<h2>List Base Component</h2>
+
+<div [ngSwitch]='type'>
+  <app-product-list *ngSwitchCase="'product'" [list]='data'></app-product-list>
+  <app-vendor-list *ngSwitchCase="'vendor'" [list]='data'></app-vendor-list>
+  <app-reference-list *ngSwitchCase="'reference'" [list]='data'></app-reference-list>
+</div>

@@ -1,3 +1,7 @@
-<p>
-  form works!
-</p>
+<h2>Form Base Component</h2>
+
+<div [ngSwitch]='type'>
+  <app-product-form *ngSwitchCase="'product'" [data]='data' (_submit)="submit($event)" ></app-product-form>
+  <app-vendor-form *ngSwitchCase="'vendor'" [data]='data' (_submit)="submit($event)"></app-vendor-form>
+  <app-reference-form *ngSwitchCase="'reference'" [data]='data' (_submit)="submit($event)"></app-reference-form>
+</div>

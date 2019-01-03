@@ -6,8 +6,8 @@ export class ApiData {
     constructor(input? : any){}
 
      //class name corresponds with db model!
-    public getName() : String 
+    public getName() : string 
     {
-        return this.constructor.name;
+        return this.constructor.name.toLowerCase();
     }
 }

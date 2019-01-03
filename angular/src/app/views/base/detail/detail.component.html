@@ -1,3 +1,8 @@
-<p>
-  detail works!
-</p>
+<h2>Detail Base Component</h2>
+
+<div [ngSwitch]='type'>
+  <app-product-detail *ngSwitchCase="'product'" [data]='data' ></app-product-detail>
+  <app-vendor-detail *ngSwitchCase="'vendor'" [data]='data'></app-vendor-detail>
+  <app-reference-detail *ngSwitchCase="'reference'" [data]='data'></app-reference-detail>
+</div>
+
