@@ -92,7 +92,7 @@ const routes: Routes = [
         path: 'user/edit',
         canActivate: [OnlyLoggedInGuard],
         component: EditComponent
-    }
+    },
 
     
 
