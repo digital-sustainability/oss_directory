@@ -22,6 +22,7 @@ import { HttpClient } from 'selenium-webdriver/http';
 import { RequestService } from '../../shared/data/request.service';
 import { HttpService } from '../../shared/sails/http.service';
 import { ApiUrl } from '../../shared/url/api-url';
+import { MaterialDesignModule } from '../../shared/material-design/material-design.module';
 
 
 /**
@@ -34,7 +35,7 @@ import { ApiUrl } from '../../shared/url/api-url';
   imports: [
     CommonModule,
     ViewerRoutingModule,
-    //EditorModule,
+    MaterialDesignModule,
   ],
   declarations: [
     ListComponent,

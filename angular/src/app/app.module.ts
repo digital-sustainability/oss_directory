@@ -15,7 +15,6 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { RegisterSuccessfulComponent } from './views/auth/register-successful/register-successful.component';
 import { RegisterConfirmComponent } from './views/auth/register-confirm/register-confirm.component';
 import { EditComponent } from './views/auth/edit/edit.component';
-import { ApiComponent } from './examples/api/api.component';
 import { FormsModule } from '@angular/forms';
 import { OssListComponent } from './oss-list/oss-list.component';
 import { OssDetailViewComponent } from './oss-detail-view/oss-detail-view.component';
@@ -39,7 +38,6 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
     RegisterConfirmComponent,
     RegisterSuccessfulComponent,
     EditComponent,
-    ApiComponent,
     OssListComponent,
     OssDetailViewComponent,
     OssChangeEntryComponent,

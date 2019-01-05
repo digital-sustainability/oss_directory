@@ -14,23 +14,15 @@ export class ApiDataProxy {
     public create(){
         return this.req.create(this._data);}
 
-    public read() : Observable<any> {
+    public read() : Observable<ApiData[]> {
         let obs = this.req.read(this._data);
         let type = this._data.getName()
         return obs.pipe(map(data => 
             {
-                if (data.id) //if single entry is returned
-                {
+                return data.map(item => {
                     let apidata = Deserializer.createNew(type);
-                    return Deserializer.deserialize(apidata, data);
-                } 
-                else //if a list is returned
-                {
-                    return data.map(item => {
-                        let apidata = Deserializer.createNew(type);
-                        return Deserializer.deserialize(apidata, item);
-                    })
-                }
+                    return Deserializer.deserialize(apidata, item);
+                })
             }
         )
         );

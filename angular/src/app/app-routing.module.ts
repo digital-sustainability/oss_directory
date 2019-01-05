@@ -7,7 +7,6 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { RegisterSuccessfulComponent } from './views/auth/register-successful/register-successful.component';
 import { RegisterConfirmComponent } from './views/auth/register-confirm/register-confirm.component';
 import { EditComponent } from './views/auth/edit/edit.component';
-import { ApiComponent } from './examples/api/api.component';
 import {OssChangeEntryComponent} from "./oss-change-entry/oss-change-entry.component";
 import {OssListComponent} from "./oss-list/oss-list.component";
 import {OssDetailViewComponent} from "./oss-detail-view/oss-detail-view.component";
@@ -30,14 +29,6 @@ const routes: Routes = [
     pathMatch: 'full',
     data: {state: 'home'}
   },
-
-  {
-    path: 'example',
-    component: ApiComponent,
-    pathMatch: 'full',
-    data: {state: 'home'}
-  },
-
   {
     path: 'firmen',
     component: FirmsComponent,

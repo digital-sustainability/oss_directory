@@ -1,12 +1,16 @@
 <h2>Detail Base Component</h2>
 
+<div *ngIf='data' [ngSwitch]='type'>
+  <mat-card>
+    <app-product-detail *ngSwitchCase="'product'" [data]='data' ></app-product-detail>
+    <app-vendor-detail *ngSwitchCase="'vendor'" [data]='data'></app-vendor-detail>
+    <app-reference-detail *ngSwitchCase="'reference'" [data]='data'></app-reference-detail>
+    
+    <a mat-button routerLink="/content/{{type}}/{{data.id}}/edit">Edit</a>
+  </mat-card>
 
-<a *ngIf='data' routerLink="/content/{{type}}/{{data.id + 1}}">Next</a>
-<a *ngIf='data' routerLink="/content/{{type}}/{{data.id - 1}}">Previous</a>
-
-<div [ngSwitch]='type'>
-  <app-product-detail *ngSwitchCase="'product'" [data]='data' ></app-product-detail>
-  <app-vendor-detail *ngSwitchCase="'vendor'" [data]='data'></app-vendor-detail>
-  <app-reference-detail *ngSwitchCase="'reference'" [data]='data'></app-reference-detail>
+  <a mat-button class="left" routerLink="/content/{{type}}/{{data.id - 1}}">Previous</a>
+  <a mat-button class="right" routerLink="/content/{{type}}/{{data.id + 1}}">Next</a>
 </div>
+
 

@@ -30,22 +30,19 @@ export class FormComponent implements OnInit {
     //if an id is given requests the item based on type and id
     //if there is no id returns a new ApiData Object based on the type
 
-    console.log("form on init");
-
     this.provider.type(this.route).subscribe(type => this.type = type);
 
     this.route.params.subscribe(params => {
       let proxy = this.provider.resolveParams(params);
       let id = proxy.data().id;
       if (id) {
-        this.provider.getData(this.route).subscribe(data => this.data = data); //observable inside observable (not that great)
+        this.provider.getData(this.route).subscribe(data => this.data = data[0]); //observable inside observable (not that great)
       }
       else 
       {
         this.data = proxy.data();
       }
     });
-    
   }
 
   private submit($event?) {
@@ -54,12 +51,12 @@ export class FormComponent implements OnInit {
     if (this.data.id)
     {
       console.log("update");
-      proxy.update().subscribe();
+      //proxy.update().subscribe();
     }
     else 
     {
       console.log("create")
-      proxy.create().subscribe();
+      //proxy.create().subscribe();
     }
     
 

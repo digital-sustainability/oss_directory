@@ -17,6 +17,6 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.provider.type(this.route).subscribe(type => this.type = type);
-    this.provider.getData(this.route).subscribe(data => this.data = data);
+    this.provider.getData(this.route).subscribe(data => this.data = data[0]); //first element because api always returns an array
   }
 }

@@ -1,7 +1,5 @@
 <h3>Product List Component</h3>
+<ng-container *ngFor="let item of list">
+  <app-list-item [item]='item'></app-list-item>
+</ng-container>
 
-<ul *ngFor="let item of list">
-  <li>
-    <app-list-item [item]='item'></app-list-item>
-  </li>
-</ul>

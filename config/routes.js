@@ -41,7 +41,7 @@ module.exports.routes = {
   },
 
   'get /api/vendor/:id' : 'vendor/find-one', //as action2 is not the same name as the controller action findOne it does not get routed correctly.
-
+  'get /api/product/:id' : 'product/find-one',
   /**
    * Auth routes
    */

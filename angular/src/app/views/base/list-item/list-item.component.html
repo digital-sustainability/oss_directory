@@ -1,7 +1,8 @@
-<h4>List Item Base Component</h4>
-
-<div [ngSwitch]='type'>
-  <app-product-list-item *ngSwitchCase="'product'" [item]='item'></app-product-list-item>
-  <app-vendor-list-item *ngSwitchCase="'vendor'" [item]='item'></app-vendor-list-item>
-  <app-reference-list-item *ngSwitchCase="'reference'" [item]='item'></app-reference-list-item>
-</div>
+<mat-list-item [ngSwitch]='type'>
+  <h4>List Item Base Component</h4>
+  <mat-card mat-button routerLink="/content/{{type}}/{{item.id}}">
+      <app-product-list-item *ngSwitchCase="'product'" [item]='item'></app-product-list-item>
+      <app-vendor-list-item *ngSwitchCase="'vendor'" [item]='item'></app-vendor-list-item>
+      <app-reference-list-item *ngSwitchCase="'reference'" [item]='item'></app-reference-list-item>
+  </mat-card>
+</mat-list-item>

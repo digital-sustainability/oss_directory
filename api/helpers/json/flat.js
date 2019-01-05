@@ -17,7 +17,6 @@ module.exports = {
 
   },
 
-
   exits: {
 
   },
@@ -31,14 +30,15 @@ module.exports = {
     //works for now 
     //try db views or native query
     inputs.json.forEach(element => {
-      let att = element[inputs.attribute][0]; //first item in list
-      
-      for (var key in att){
-        if (!element[key]){
-          element[key] = att[key];
+      let att = element[inputs.attribute][0];
+      if (att) {
+        for (var key in att){
+          if (!element[key]){
+            element[key] = att[key];
+          }
         }
+        delete element[inputs.attribute];
       }
-      delete element[inputs.attribute];
     });
 
     return exits.success(inputs.json);

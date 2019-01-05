@@ -1,7 +1,8 @@
 <h2>List Base Component</h2>
 
-<div [ngSwitch]='type'>
+<mat-list *ngIf='type' [ngSwitch]='type'>
+  <a mat-button class="edit" routerLink="/content/{{type}}/new">New</a>
   <app-product-list *ngSwitchCase="'product'" [list]='data'></app-product-list>
   <app-vendor-list *ngSwitchCase="'vendor'" [list]='data'></app-vendor-list>
   <app-reference-list *ngSwitchCase="'reference'" [list]='data'></app-reference-list>
-</div>
+</mat-list>

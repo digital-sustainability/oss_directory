@@ -6,6 +6,7 @@ import { FormComponent } from '../../views/base/form/form.component';
 import { ProductFormComponent } from '../../views/product/product-form/product-form.component';
 import { ReferenceFormComponent } from '../../views/reference/reference-form/reference-form.component';
 import { VendorFormComponent } from '../../views/vendor/vendor-form/vendor-form.component';
+import { MaterialDesignModule } from '../../shared/material-design/material-design.module';
 
 /**
  * Responsible for creating, updating and deleting processes by the user.
@@ -18,7 +19,8 @@ import { VendorFormComponent } from '../../views/vendor/vendor-form/vendor-form.
 @NgModule({
   imports: [
     CommonModule,
-    EditorRoutingModule
+    EditorRoutingModule,
+    MaterialDesignModule,
   ],
   declarations: [
     FormComponent,
