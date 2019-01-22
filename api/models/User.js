@@ -63,6 +63,15 @@ module.exports = {
 
     role: {
       model: 'role'
+    },
+
+    organisation : {
+      model : 'organisation'
+    },
+
+    product : {
+      collection : 'product',
+      via : 'user'
     }
   },
 

@@ -6,7 +6,7 @@
     <app-vendor-detail *ngSwitchCase="'vendor'" [data]='data'></app-vendor-detail>
     <app-reference-detail *ngSwitchCase="'reference'" [data]='data'></app-reference-detail>
     
-    <a mat-button routerLink="/content/{{type}}/{{data.id}}/edit">Edit</a>
+    <a mat-button routerLink="/content/{{type}}/edit/{{data.getIdentifier()}}">Edit</a>
   </mat-card>
 
   <a mat-button class="left" routerLink="/content/{{type}}/{{data.id - 1}}">Previous</a>

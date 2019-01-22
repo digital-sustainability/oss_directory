@@ -22,7 +22,7 @@ const routes: Routes = [
     component: DetailComponent
   },
   {
-    path: ':type/:id/edit',
+    path: ':type/edit/:id',
     loadChildren: '../editor/editor.module#EditorModule'
   },
 ];

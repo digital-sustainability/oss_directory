@@ -8,10 +8,10 @@ module.exports = {
 
 
   inputs: {
-    id : {
-      type : 'number'
-    }
 
+    id : {
+      type : 'string'
+    }
   },
 
 
@@ -19,12 +19,19 @@ module.exports = {
 
   },
 
-
   fn: async function (inputs, exits) {
 
-    var product = await Product.findOne({id : inputs.id}).populate('translations');
+    let product = await Product.findOne({title : inputs.id}).populateAll();
 
-    product = await sails.helpers.json.flat([product], 'translations');
+    let results = [];
+
+    for (let org of product.organisations){
+      let a = await Organisation.findOne({ id : org.id})
+        .populate('translations', { where : { language : 'EN'}});
+      results.push(a);
+    }
+
+    product.organisations = results;
 
     return exits.success(product);
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataProviderService } from '../../../shared/data/data-provider.service';
+import { ApiData } from '../../../shared/data/api-data';
 
 @Component({
   selector: 'app-detail',
@@ -9,14 +10,14 @@ import { DataProviderService } from '../../../shared/data/data-provider.service'
 })
 export class DetailComponent implements OnInit {
 
-  private data;
-  private type;
+  private data : ApiData;
+  private type : string;
 
   constructor(private route : ActivatedRoute, 
     private provider : DataProviderService) { }
 
   ngOnInit() {
     this.provider.type(this.route).subscribe(type => this.type = type);
-    this.provider.getData(this.route).subscribe(data => this.data = data[0]); //first element because api always returns an array
+    this.provider.getData(this.route).subscribe(data => this.data = data);
   }
 }

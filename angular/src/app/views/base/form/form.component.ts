@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProviderService } from '../../../shared/data/data-provider.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiData } from '../../../shared/data/api-data';
-import { map, switchMap } from 'rxjs/operators';
-import { Deserializer } from '../../../shared/data/deserializer';
-import { Observable, empty, of, never } from 'rxjs';
+import { map, switchMap, share } from 'rxjs/operators';
 import { ApiDataProxy } from '../../../shared/data/api-data-proxy';
-import { RequestService } from '../../../shared/data/request.service';
+import { HttpService } from '../../../shared/sails/http.service';
+import { ApiUrl } from '../../../shared/url/api-url';
+import { of, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -16,50 +16,56 @@ import { RequestService } from '../../../shared/data/request.service';
 export class FormComponent implements OnInit {
 
   private type : string;
-  private data : ApiData;
+  private data : Observable<ApiData>;
+
+  private proxy : ApiDataProxy;
 
   constructor(
+    private router : Router,
     private route : ActivatedRoute, 
     private provider : DataProviderService,
-    private req : RequestService) { 
-
+    private http : HttpService,
+    private url : ApiUrl) { 
+      this.proxy = new ApiDataProxy(http, url);
     }
+
+    //maybe create two forms : one for new entries and one for editing?
+    //later for different behavior and views
 
   ngOnInit() {
 
     //if an id is given requests the item based on type and id
     //if there is no id returns a new ApiData Object based on the type
 
-    this.provider.type(this.route).subscribe(type => this.type = type);
-
-    this.route.params.subscribe(params => {
-      let proxy = this.provider.resolveParams(params);
-      let id = proxy.data().id;
-      if (id) {
-        this.provider.getData(this.route).subscribe(data => this.data = data[0]); //observable inside observable (not that great)
-      }
-      else 
-      {
-        this.data = proxy.data();
-      }
-    });
+    this.setup();
   }
 
-  private submit($event?) {
+  ngOnChanges() {
 
-    let proxy = new ApiDataProxy(this.req, this.data);
-    if (this.data.id)
-    {
-      console.log("update");
-      //proxy.update().subscribe();
-    }
-    else 
-    {
-      console.log("create")
-      //proxy.create().subscribe();
-    }
+  }
+
+  setup() {
     
+    let obs = this.route.params.pipe(
+      map( (params) => {
+        let data = this.provider.resolveParams(params);
+        this.type = data.getName();
+        return data;
+      }),
+      switchMap( data => {
+        if (data.getIdentifier()){
+          return this.proxy.read(data);
+        } else {
+          return of(data);
+        }
+      }), share() //to make sure not to send the request multiple this (e.g. here and vendor-form)
+    );
+    this.data = obs;
+    obs.subscribe(data => this.data = data);
+  }
 
-    console.log("clicked");
+  private submit(){
+
+    //update url maybe on change
   }
 }

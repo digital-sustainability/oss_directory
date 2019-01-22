@@ -33,7 +33,7 @@ module.exports.routes = {
     skipRegex: /^(\/api)|(\/__getcookie)/
   },
 
-  /**
+  /** 
    * Enable CSRF in security config settings
    */
   'get /api/csrf-token': {
@@ -42,6 +42,16 @@ module.exports.routes = {
 
   'get /api/vendor/:id' : 'vendor/find-one', //as action2 is not the same name as the controller action findOne it does not get routed correctly.
   'get /api/product/:id' : 'product/find-one',
+  'get /api/client/:id' : 'client/find-one',
+  'get /api/community/:id' : 'community/find-one',
+  'get /api/successstory/:id' : 'successstory/find-one',
+
+  'patch /api/vendor/:id' : 'vendor/update-one',
+  'patch /api/product/:id' : 'product/update-one',
+  'patch /api/client/:id' : 'client/update-one',
+  'patch /api/community/:id' : 'community/update-one',
+  'patch /api/successstory/:id' : 'successstory/update-one',
+
   /**
    * Auth routes
    */

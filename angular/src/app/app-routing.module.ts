@@ -7,11 +7,6 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { RegisterSuccessfulComponent } from './views/auth/register-successful/register-successful.component';
 import { RegisterConfirmComponent } from './views/auth/register-confirm/register-confirm.component';
 import { EditComponent } from './views/auth/edit/edit.component';
-import {OssChangeEntryComponent} from "./oss-change-entry/oss-change-entry.component";
-import {OssListComponent} from "./oss-list/oss-list.component";
-import {OssDetailViewComponent} from "./oss-detail-view/oss-detail-view.component";
-import {FirmsComponent} from "./firms/firms.component";
-import {ProductsComponent} from "./products/products.component";
 
 const routes: Routes = [
 
@@ -29,35 +24,6 @@ const routes: Routes = [
     pathMatch: 'full',
     data: {state: 'home'}
   },
-  {
-    path: 'firmen',
-    component: FirmsComponent,
-    pathMatch: 'full',
-    data: {state: 'home'}
-  },
-
-  {
-    path: 'produkte',
-    component: ProductsComponent,
-    pathMatch: 'full',
-    data: {state: 'home'}
-  },
-
-  {
-    path: 'update/:id',
-    component: OssChangeEntryComponent,
-  },
-
-  {
-    path: 'create',
-    component: OssChangeEntryComponent,
-  },
-
-  {
-    path: 'details/:id',
-    component: OssDetailViewComponent,
-  },
-
     
     {
         path: 'login',

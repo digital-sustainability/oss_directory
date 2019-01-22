@@ -35,19 +35,40 @@ module.exports.bootstrap = async function (done) {
   Excepteur sint occaecat cupidatat non proident, 
   sunt in culpa qui officia deserunt mollit anim id est laborum.`;
 
-  await Address.createEach([
-    { title : 'Adobe Corp', street : 'flowerstreet', house_number : 101, additional : '', city : 'San Jose', zip : '1010', state : 'California'},
-    { title : 'Confluent Corp', street : 'arlingtonstreet', house_number : 202, additional : '', city : 'Palo Alto', zip : '2020', state : 'California'},
-    { title : 'Databricks', street : 'huflepuff', house_number : 303, additional : '', city : 'San Francisco', zip : '3030', state : 'California'},
-    { title : 'Docker', street : 'chesterfield', house_number : 404, additional : '', city : 'San Francisco', zip : '4040', state : 'California'},
-    { title : 'Elastic', street : 'nutmegstreet', house_number : 505, additional : '', city : 'Mountain View', zip : '5050', state : 'California'},
+
+  await Category.createEach([
+    { title : 'CRM'},
+    { title : 'Cloud Storage'},
+    { title : 'ERP'}
   ]);
 
-  await VendorTranslation.createEach([
+  await Industry.createEach([
+    { title : 'ICT'},
+    { title : 'Behörden'},
+  ]);
+
+  await Address.createEach([
+    { street : 'Aarbergstrasse', house_number : 4, city : 'Biel', zip : 2503, state : 'Bern'},
+    { street : 'Münstergasse', house_number : 32, city : 'Bern', zip : 3002, state : 'Bern'},
+    { street : 'Langstrasse', house_number : 15, city : 'Zürich', zip : 5023, state : 'Zürich'},
+    { street : 'Hasliweg', house_number : 1, city : 'Chur', zip : 4123, state : 'Luzern'},
+    { street : 'Strandweg', house_number : 50, city : 'Biel', zip : 2504, state : 'Bern'},
+  ]);
+
+  await Organisation.createEach([
+    { title : 'Adobe', address : 1},
+    { title : 'Confluent', address : 2},
+    { title : 'Databricks', address : 3},
+    { title : 'Docker', address : 4},
+    { title : 'Ubuntu', address : 5},
+    
+  ]);
+
+  await OrganisationTranslation.createEach([
     { language : 'EN', description : `Adobe has a strong commitment to open source and has more than 250 public repositories on its GitHub site. 
     Some of its best-known open source projects are developer tools like the PhoneGap web development framework, 
     the Brackets text editor and the Topcoat CSS library. Adobe staff also contribute regularly to other open source projects like 
-    Gecko, Blink, WebKit, Apache Cordova, Flex, Felix and many others.`, organisation : 1},
+    Gecko, Blink, WebKit, Apache Cordova, Flex, Felix and many others.`, contact : 'hans peter', organisation : 1},
     { language : 'EN', description : `A major player in the big data space, 
     Confluent is the company behind Apache Kafka, which was 20th on that list of most popular open source projects. 
     The company describes Kafka as "a distributed streaming platform capable of handling trillions of events a day." 
@@ -56,38 +77,68 @@ module.exports.bootstrap = async function (done) {
     { language : 'EN', description : `Databricks is the company that supports another very popular big data streaming project — Apache Spark. 
     The developers that founded the project started Databricks in 2013 to offer commercial support for the effort. According to the company, 
     Spark has the "largest open source community in big data, with over 1,000 contributors from 250+ organizations." 
-    Well-known Databricks customers include NBCUniversal, HP, Shell, Cisco, 3M and many others.`, organisation : 3},
+    Well-known Databricks customers include NBCUniversal, HP, Shell, Cisco, 3M and many others.`, contact : 'ueli', organisation : 3},
     { language : 'EN', description : `Over the last few years, 
     the Docker containerization technology has emerged as one of the most influential open source projects for enterprise users. 
     It has more than 32,000 stars on GitHub and has been downloaded more than 8 billion times. 
     The company behind the technology, also named Docker, was listed third on the list of companies with the most GitHub contributors in 2016. 
     The Docker software is very popular with companies using agile and DevOps approaches, and the company claims, 
-    "On average companies using Docker experience a 7X improvement in how frequently they are able to ship software."`, organisation : 4},
+    "On average companies using Docker experience a 7X improvement in how frequently they are able to ship software."`, contact : 'ruedi' ,organisation : 4},
     { language : 'EN', description : `Best known for its open source Elasticsearch project, 
     Elastic offers a complete stack of products designed that can "reliably and securely take data from any source, 
     in any format, and search, analyze, and visualize it in real time." Elasticsearch ranked seventh on the index of popular open source projects, 
     and it has 25,254 stars on GitHub. Elastic also has several other open source projects, including Kibana, Beats and Logstash.`, organisation : 5},
   ]);
-  
+
   await Vendor.createEach([
-    { title : 'Adobe', address : 1, translations : [1]},
-    { title : 'Confluent', address : 2, translations : [2]},
-    { title : 'Databricks', address : 3, translations : [3]},
-    { title : 'Docker', address : 4, translations : [4]},
-    { title : 'Elastic', address : 5, translations : [5]},
+    { website : 'www.google.ch', locations : 'bern, zürich, lengnau', employee_num : 15, organisation : 1 },
+    { website : 'www.slack.com', locations : 'timbuktu', employee_num : 10, organisation : 2 },
+  ]);
+
+  await Client.createEach([
+    { industry : 1, organisation : 3},
+    { industry : 2, organisation : 4},
+  ]);
+
+  await Community.createEach([
+    { organisation : 5, clients : [1,2], vendors : [1,2]}
   ]);
 
 
   await Product.createEach([
-    { title : 'RedHat',},
-    { title : 'Linux',},
-    { title : 'Docker',},
-    { title : 'Couchbase',},
-    { title : 'Xamarin',},
-    { title : 'ElasticSearch',},
-    { title : 'mariaDB',},
-    { title : 'Sails',},
-    { title : 'RubyOnRails',},
+    { source_code_link : 'www.linktosource.com', links : 'some other links', category : 1, title : 'RedHat', organisations : [1,2,3]},
+    { source_code_link : 'www.linktosource.com', links : 'some other links', category : 1, title : 'Linux', organisations : [1,2,3]},
+    { source_code_link : 'www.linktosource.com', links : 'some other links', category : 1, title : 'Docker', organisations : [1,2,3]},
+    { source_code_link : 'www.linktosource.com', links : 'some other links', category : 1, title : 'Couchbase', organisations : [2,3,4]},
+    { source_code_link : 'www.linktosource.com', links : 'some other links', category : 1, title : 'ElasticSearch', organisations : [1,5]},
+    { source_code_link : 'www.linktosource.com', links : 'some other links', category : 1, title : 'Sails', organisations : [3]},
+  ]);
+
+  await ProductTranslation.createEach([
+    { language : 'EN', description : lorem, product : 1},
+    { language : 'DE', description : lorem, product : 1},
+    { language : 'FR', description : 'quoi', product : 1},
+    { language : 'EN', description : lorem, product : 2},
+    { language : 'EN', description : lorem, product : 3},
+    { language : 'EN', description : lorem, product : 4},
+    { language : 'EN', description : lorem, product : 5},
+    { language : 'EN', description : lorem, product : 6},
+  ]);
+
+  await SuccessStory.createEach([
+    { products : [1,4,6], client : 1, vendor : 1},
+    { products : [1,2], client : 2, vendor : 2},
+    { products : [3], client : 1},
+    { products : [2,5], client : 2}
+  ]);
+
+  await SuccessStoryTranslation.createEach([
+    { title : 'title1', lead : lorem, base : lorem, goal : lorem, proposal : lorem, outcome : lorem, success_story : 1},
+    { title : 'title2', language : 'DE' , lead : lorem, base : lorem, goal : lorem, proposal : lorem, outcome : lorem, success_story : 1},
+
+    { title : 'title3', lead : lorem, base : lorem, goal : lorem, proposal : lorem, outcome : lorem, success_story : 2},
+    { title : 'title4', lead : lorem, base : lorem, goal : lorem, proposal : lorem, outcome : lorem, success_story : 3},
+    { title : 'title5', lead : lorem, base : lorem, goal : lorem, proposal : lorem, outcome : lorem, success_story : 4},
   ]);
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.

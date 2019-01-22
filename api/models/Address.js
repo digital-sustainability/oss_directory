@@ -11,12 +11,6 @@ module.exports = {
     zip: { type: 'number',},
     state: { type : 'string',},
 
-    vendor : {
-      model : 'vendor',
-      unique : true
-    },
-
-
   }
 };
 

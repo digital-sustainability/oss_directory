@@ -8,9 +8,11 @@ module.exports = {
 
 
   inputs: {
+
     id : {
-      type : 'number'
+      type : 'string'
     }
+
   },
 
 
@@ -21,10 +23,13 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    var vendor = await Vendor.findOne({id : inputs.id}).populate('translations');
+    //TODO: solve that with join tables later on
 
-    vendor = await sails.helpers.json.flat([vendor], 'translations');
-    return exits.success(vendor);
+    let org = await Organisation.findOne({ title : inputs.id });
+    let vendor = await Vendor.findOne({ organisation : org.id }).populateAll();
+    let result = await Vendor.populateStrategy(vendor, { translation : { language : 'EN'}});
+
+    return exits.success(result);
 
   }
 

@@ -1,0 +1,227 @@
+@startuml
+' uncomment the line below if you're using computer with a retina display
+skinparam dpi 300
+!define Table(name,desc) class name as "desc" << (T,#AAAAAA) >>
+' we use bold for primary key
+' green color for unique
+' and underscore for not_null
+!define primary_key(x) <b>x</b>
+!define unique(x) <color:green>x</color>
+!define not_null(x) <u>x</u>
+' other tags available:
+' <i></i>
+' <back:COLOR></color>, where color is a color name or html color code
+' (#FFAACC)
+' see: http://plantuml.com/classes.html#More
+hide methods
+hide stereotypes
+
+' entities
+
+'
+'   NEWS
+'
+
+Table(top_news, "top_news") {
+    created_at
+    update_at
+
+    img_path
+    title
+    lead 
+    content 
+    detail_link
+}
+
+
+Table(news_feed_source, "news_feed_source") {
+    created_at
+    update_at 
+
+    img_path
+    rss_url
+}
+
+Table(news, "news") {
+    primary_key(id)
+    created_at
+    upddated_at
+
+    title 
+    lead
+    origin_url 
+    published_at
+}
+
+'
+'   Product
+'
+
+Table(product, "product") {
+    created_at 
+    updated_at
+
+    title
+    logo_bitmap
+    logo_vector
+    url_refs
+    source_code_url
+}
+
+Table(product_category, "product_category"){
+    created_at
+    updated_at
+
+    title
+    description
+}
+
+Table(product_translation, "product_translation"){
+    created_at
+    updated_at
+
+    description
+    language_id
+}
+
+'
+'   Organisation
+'
+
+Table(community, "community"){
+    created_at 
+    updated_at 
+
+    logo 
+}
+
+Table(community_translation, "community_translation"){
+    created_at 
+    updated_at 
+
+    description
+}
+
+Table(vendor, "vendor"){
+    created_at 
+    updated_at 
+
+    name
+    website
+    logo
+    employee num 
+    
+}
+
+Table(vendor_translation, "vendor_translation"){
+    created_at 
+    updated_at 
+
+    description 
+    contact person 
+    claim
+}
+
+
+Table(client, "client"){
+    created_at 
+    updated_at 
+    logo 
+
+}
+
+
+Table(client_translation, "client_translation"){
+    created_at 
+    updated_at 
+    description 
+    language 
+    contact_person
+}
+
+
+'
+'   Success Story
+'
+
+
+Table(success_story, "success_story"){
+    created_at 
+    updated_at
+}
+
+Table(success_story_translation, "success_story_translation"){
+    language
+    title 
+    ausgangslage
+    zielsetzung
+    realisation
+    learnings
+}
+
+'
+' Knowhow
+'
+
+Table(knowhow, "knowhow"){
+    title 
+    authors 
+    pdf_path
+    lead
+    text 
+    img_path
+}
+
+
+'
+' Events
+'
+
+Table(events, "events"){
+    begin_date
+    end_date 
+    title 
+    description
+    url 
+    img_path 
+    flyer_path
+}
+
+
+
+
+
+
+Table(address, "address") {
+    primary_key(id)
+    created_at 
+    updated_at 
+}
+
+Table(user, "user"){
+    primary_key(id)
+    created_at 
+    updated_at 
+}
+
+Table(role, "role"){
+    primary_key(id)
+    created_at 
+    updated_at 
+}
+
+Table(permission, "permission"){
+    primary_key(id)
+    created_at 
+    updated_at 
+}
+
+Table(action, "action"){
+    primary_key(id)
+    created_at 
+    updated_at 
+}
+
+product --{ product_translation
+
+@enduml

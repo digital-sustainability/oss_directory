@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SailsModule } from "angular2-sails";
+//import { SailsModule } from "angular2-sails";
 import { HttpInterceptorService } from './shared/auth/http-interceptor.service';
 import { AuthService } from './shared/auth/auth.service';
 import { MaterialDesignModule } from './shared/material-design/material-design.module';
@@ -16,13 +16,8 @@ import { RegisterSuccessfulComponent } from './views/auth/register-successful/re
 import { RegisterConfirmComponent } from './views/auth/register-confirm/register-confirm.component';
 import { EditComponent } from './views/auth/edit/edit.component';
 import { FormsModule } from '@angular/forms';
-import { OssListComponent } from './oss-list/oss-list.component';
-import { OssDetailViewComponent } from './oss-detail-view/oss-detail-view.component';
-import { OssChangeEntryComponent } from './oss-change-entry/oss-change-entry.component';
 import { MatStepperModule, MatInputModule, MatButtonModule, MatAutocompleteModule } from '@angular/material';
 import { NavbarComponent } from './views/navbar/navbar.component';
-import { FirmsComponent } from './firms/firms.component';
-import { ProductsComponent } from './products/products.component';
 import { ViewerModule } from './modules/viewer/viewer.module';
 
 export function appInitFactory(authService: AuthService): () => Promise<any> {
@@ -38,19 +33,14 @@ export function appInitFactory(authService: AuthService): () => Promise<any> {
     RegisterConfirmComponent,
     RegisterSuccessfulComponent,
     EditComponent,
-    OssListComponent,
-    OssDetailViewComponent,
-    OssChangeEntryComponent,
     NavbarComponent,
-    FirmsComponent,
-    ProductsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialDesignModule,
-    SailsModule.forRoot(),
+    //SailsModule.forRoot(),
     HttpClientModule,
     FormsModule,
     MatStepperModule,

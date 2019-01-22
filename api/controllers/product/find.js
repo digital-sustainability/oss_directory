@@ -19,9 +19,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    var products = await Product.find().populate('translations');
-
-    products = await sails.helpers.json.flat(products, 'translations');
+    let products = await Product.find().populate('translations', { where : { language : 'EN'}});
 
     return exits.success(products);
 

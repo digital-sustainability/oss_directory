@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
-import { SailsService } from 'angular2-sails';
+//import { SailsService } from 'angular2-sails';
 import { AuthService } from './shared/auth/auth.service';
 import { User } from './shared/user/user';
 import { Router } from '@angular/router';
@@ -14,7 +14,8 @@ import { MatSnackBar } from '@angular/material';
 export class AppComponent {
   title = 'Sails Angular';
 
-  constructor(private _sailsService: SailsService,
+  constructor(
+    //private _sailsService: SailsService,
     private authService: AuthService,
     private router: Router,
     private snackbar: MatSnackBar){}
@@ -26,7 +27,7 @@ export class AppComponent {
       transports: ['websocket'],
       reconnection: true
     }
-    this._sailsService.connect(opts);
+    //this._sailsService.connect(opts);
 
     //this.requestCSRFToken()
     this.checkLogin();

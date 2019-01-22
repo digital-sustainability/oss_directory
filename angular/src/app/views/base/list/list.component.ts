@@ -3,25 +3,29 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { DataProviderService } from '../../../shared/data/data-provider.service';
 import { ApiData } from '../../../shared/data/api-data';
 import { Observable } from 'rxjs';
+import { Setup } from '../../setup';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit {
+export class ListComponent extends Setup implements OnInit {
 
   private type : string;
   private data : ApiData[];
 
   constructor(
-    private route : ActivatedRoute, 
-    private provider : DataProviderService) { }
+    protected route : ActivatedRoute, 
+    protected provider : DataProviderService) { 
+      super();
+    }
 
   ngOnInit() {
-
-    this.provider.type(this.route).subscribe(type => this.type = type);
-    this.provider.getData(this.route).subscribe(data => this.data = data);
+    this.readType().subscribe(type => this.type = type);
+    this.requestData().subscribe(data => this.data = data);
   }
+
+
 
 }

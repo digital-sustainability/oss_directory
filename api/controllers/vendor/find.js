@@ -13,44 +13,29 @@ module.exports = {
 
 
   exits: {
+
   },
 
 
   fn: async function (inputs, exits) {
 
-    var vendors = await Vendor.find().populate('translations');
+    let vendors = await Vendor.find().populateAll();
 
-    vendors = await sails.helpers.json.flat(vendors, 'translations');
+    let results = [];
 
-    // sails.log.debug('Running custom `findOne` action.  (Will look up user #'+req.param(\'id\')...');
+    //TODO: rework async function
 
-    // User.findOne({ id: req.param('id') }).omit(['password'])
-    // .populate('company', { select: ['profileImageUrl'] })
-    // .populate('top8', { omit: ['password'] })
-    // .exec(function(err, userRecord) {
-    //   if (err) {
-    //     switch (err.name) {
-    //       case 'UsageError': return res.badRequest(err);
-    //       default: return res.serverError(err);
-    //     }
-    //   }
+    //TODO: rework needed : check types and generalize
 
-    //   if (!userRecord) { return res.notFound(); }
+    //TODO: language param
 
-    //   if (req.isSocket) {
-    //     User.subscribe(req, [user.id]);
-    //   }
+    //TODO: maybe references and product hints as well
 
-    //   return res.ok({
-    //     model: 'user',
-    //     luckyCoolNumber: Math.ceil(10*Math.random()),
-    //     record: userRecord
-    //   });
-    // });
+    for (let item of vendors){
+      item = await Vendor.populateStrategy(item, { translation : { language : 'EN'}})
+      results.push(item);
+    }
 
-    return exits.success(vendors);
-
+    return exits.success(results);
   }
-
-
 };

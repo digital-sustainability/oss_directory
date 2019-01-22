@@ -4,15 +4,15 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, pipe, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { map, catchError } from 'rxjs/operators';
-import { RequestService } from './request/request.interface';
+import { ApiUrl } from '../url/api-url';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService implements RequestService{
+export class HttpService{
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private url : ApiUrl) {}
 
   request(options): Observable<any>{
     return
@@ -40,5 +40,8 @@ export class HttpService implements RequestService{
     let http_headers = new HttpHeaders(headers);
     return {headers : http_headers, params : http_params};
   }
+
+
+  //TODO: Handle errors and log stuff
 
 }

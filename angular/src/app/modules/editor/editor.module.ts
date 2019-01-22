@@ -7,6 +7,7 @@ import { ProductFormComponent } from '../../views/product/product-form/product-f
 import { ReferenceFormComponent } from '../../views/reference/reference-form/reference-form.component';
 import { VendorFormComponent } from '../../views/vendor/vendor-form/vendor-form.component';
 import { MaterialDesignModule } from '../../shared/material-design/material-design.module';
+import { FormsModule } from '@angular/forms';
 
 /**
  * Responsible for creating, updating and deleting processes by the user.
@@ -21,6 +22,7 @@ import { MaterialDesignModule } from '../../shared/material-design/material-desi
     CommonModule,
     EditorRoutingModule,
     MaterialDesignModule,
+    FormsModule
   ],
   declarations: [
     FormComponent,

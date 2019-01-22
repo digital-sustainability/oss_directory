@@ -1,8 +1,58 @@
 <h4>Vendor Detail Component</h4>
 
-<div *ngIf='data'>
-  <p>Id: {{data.id}}</p>
-  <br>
-  <p>Title: {{data.title}}</p>
-  <br>
+<div *ngIf='vendor'>
+
+  <form *ngIf='vendor'>
+    <div>
+      <label for="website">Website</label> 
+      <input type="text" id="website" name="website"
+      [(ngModel)]="vendor.website"> 
+    </div>
+
+    <div>
+      <label for="locations">Locations</label> 
+      <input type="text" id="locations" name="locations"
+      [(ngModel)]="vendor.locations"> 
+    </div>
+
+    <div>
+      <label for="employee_num">Number of Employees</label> 
+      <input type="text" id="employee_num" name="employee_num"
+      [(ngModel)]="vendor.employee_num"> 
+    </div>
+
+    <button type="submit" (click)="submit(vendor)">Submit</button>
+  </form>
+
+  <form *ngIf='organisation'>
+      <div>
+        <label for="title">Title</label> 
+        <input type="text" id="title" name="title"
+        [(ngModel)]="organisation.title"> 
+      </div>
+  
+      <button type="submit" (click)="submit(organisation)">Submit</button>
+    </form>
+
+    <form *ngIf='translation'>
+        <div>
+          <label for="description">Description</label> 
+          <input type="text" id="description" name="description"
+          [(ngModel)]="translation.description"> 
+        </div>
+    
+        <div>
+          <label for="language">Language</label> 
+          <input type="text" id="language" name="language"
+          [(ngModel)]="translation.language"> 
+        </div>
+    
+        <div>
+          <label for="claim">Claim</label> 
+          <input type="text" id="claim" name="claim"
+          [(ngModel)]="translation.claim"> 
+        </div>
+    
+        <button type="submit" (click)="submit(translation)">Submit</button>
+      </form>
 </div>

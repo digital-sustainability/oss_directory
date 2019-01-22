@@ -8,37 +8,28 @@ import { environment } from "../../../environments/environment";
 
 export class ApiUrl {
 
-    public build(data : ApiData){
-        let buffer = [];
-        this.addEnvironment(buffer);
-        this.addModel(buffer, data);
-
-        if (data.id){
-            this.addId(buffer, data);
-        }
-
-        return buffer.join("");
+    public create(data : ApiData) : string {
+        return environment.apiURL + "api/" + data.getName();
     }
 
-    private addEnvironment(
-        buffer: Array < String > ) 
-    {
-        buffer.push(environment.apiURL);
-        buffer.push("api/");
+    public update(data : ApiData) : string {
+        return environment.apiURL + "api/" + data.getName() + "/" + data.id;
     }
 
-    public addModel(
-        buffer: Array < String > , data : ApiData) 
-    {
-        buffer.push(data.getName());
-        buffer.push("/");
+    public find(data : ApiData) : string {
+        if (data.getIdentifier()) return this.findOne(data);
+        return environment.apiURL + "api/" + data.getName();
     }
 
-    public addId(
-        buffer: Array < String > , data : ApiData) 
-    {
-        buffer.push(data.id + "");
-        buffer.push("/");
+    public findOne(data : ApiData) : string {
+        return environment.apiURL + "api/" + data.getName() + "/" + data.getIdentifier();
+    } 
+
+    public delete() : string {
+        return ;
     }
 
+    public search() : string {
+        return ;
+    }
 }
