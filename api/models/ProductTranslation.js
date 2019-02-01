@@ -4,12 +4,9 @@ module.exports = {
   tableName: 'product_translation',
   attributes: {
 
-    language : { type : 'string', defaultsTo : 'EN',},
-    description : { type : 'string', columnType: 'text',},
-
-    product : {
-      model : 'product'
-    }
+    language   : { model : 'language', required : true},
+    description: { type : 'string', columnType: 'text',},
+    product: { model : 'product', required : true}
 
   }
 };

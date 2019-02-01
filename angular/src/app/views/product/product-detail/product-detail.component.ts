@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ApiData } from '../../../shared/data/api-data';
+import { Product } from '../../../shared/model/product';
 
 @Component({
   selector: 'app-product-detail',
@@ -7,7 +9,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductDetailComponent implements OnInit {
 
-  @Input() data;
+  private product : Product;
+
+  @Input() set data(data : ApiData) {
+    if(data) this.product = data as Product;
+  }
 
   constructor() { }
 

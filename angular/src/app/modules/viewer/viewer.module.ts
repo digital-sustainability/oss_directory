@@ -46,6 +46,11 @@ import { MaterialDesignModule } from '../../shared/material-design/material-desi
     ReferenceListItemComponent,
     ReferenceDetailComponent,
   ],
+  exports: [
+    ProductDetailComponent,
+    VendorDetailComponent,
+    ReferenceDetailComponent,
+  ],
   providers: [
     DataProviderService,
     ApiUrl,

@@ -2,31 +2,29 @@ import { Organisation } from "./organisation";
 import { ApiData } from "../data/api-data";
 import { Deserializer } from "../data/deserializer";
 
-export class View extends ApiData{
+export class Category extends ApiData {
 
-    no_identifier : string;
-    counter : number = null;
-
-    public setIdentifier(id : string){
-        this.no_identifier = id;
+    title : string = null;
+    
+    public setIdentifier(id : string ){
+        this.title = id;
     }
 
     public getIdentifier() : string {
-        return this.no_identifier;
+        return this.title;
     }
 
-    protected _deserialize(input : any) : ApiData {
+    protected _deserialize(input : any) : ApiData{
         return this;
     }
 
     protected _serialize() : any {
-        return this;
+        let object = JSON.parse(this.input);
+        return object;
     }
 
     public isValid() : boolean{
         return true;
     }
-
-    public test() {}
 
 }

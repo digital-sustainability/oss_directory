@@ -17,13 +17,9 @@ module.exports = {
                 }
         },
 
-        exits : {
+        exits : {},
 
-        },
-
-        fn: async function(inputs, exits){
-                
-        }
+        fn: async function(inputs, exits){}
 };
 
 

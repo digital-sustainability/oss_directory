@@ -27,7 +27,7 @@ module.exports = {
 
     let org = await Organisation.findOne({ title : inputs.id });
     let vendor = await Vendor.findOne({ organisation : org.id }).populateAll();
-    let result = await Vendor.populateStrategy(vendor, { translation : { language : 'EN'}});
+    let result = await Vendor.populateStrategy(vendor, { translation : { language : 1}});
 
     return exits.success(result);
 

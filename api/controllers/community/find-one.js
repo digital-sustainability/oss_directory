@@ -23,7 +23,7 @@ module.exports = {
 
     let org = await Organisation.findOne({ title : inputs.id });
     let community = await Community.findOne({ organisation : org.id }).populateAll();
-    let result = await Community.populateStrategy(community, { translation : { language : 'EN'}});
+    let result = await Community.populateStrategy(community, { translation : { language : 1}});
 
     return exits.success(result);
 

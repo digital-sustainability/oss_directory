@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Vendor } from '../../../shared/model/vendor';
-import { Organisation, Translation } from '../../../shared/model/organisation';
+import { Organisation, OrganisationTranslation } from '../../../shared/model/organisation';
 import { ApiData } from '../../../shared/data/api-data';
 import { Observable } from 'rxjs';
 import { ApiDataProxy } from '../../../shared/data/api-data-proxy';
 import { HttpService } from '../../../shared/sails/http.service';
 import { ApiUrl } from '../../../shared/url/api-url';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-vendor-form',
@@ -17,7 +16,7 @@ export class VendorFormComponent implements OnInit {
 
   private vendor : Vendor;
   private organisation : Organisation;
-  private translations : Translation[] = [];
+  private translations : OrganisationTranslation[] = [];
 
   private proxy ; ApiDataProxy;
 

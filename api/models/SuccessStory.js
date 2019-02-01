@@ -10,26 +10,18 @@ module.exports = {
   tableName: 'success_story',
   attributes: {
 
-    view : {
-      model : 'view',
-    },
+    view: {model : 'view',},
+    client: {model : 'client', required: true},
+    vendor: {model : 'vendor',},
 
     products : {
-      collection : 'product',
-      via : 'success_stories'
-    },
-
-    client : {
-      model : 'client',
-    },
-
-    vendor : {
-      model : 'vendor',
+      collection: 'product',
+      via       : 'success_stories'
     },
 
     translations : {
-      collection : 'successstorytranslation',
-      via : 'success_story',
+      collection: 'successstorytranslation',
+      via       : 'success_story',
     }
   }
 

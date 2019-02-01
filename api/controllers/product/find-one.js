@@ -27,7 +27,7 @@ module.exports = {
 
     for (let org of product.organisations){
       let a = await Organisation.findOne({ id : org.id})
-        .populate('translations', { where : { language : 'EN'}});
+        .populate('translations');
       results.push(a);
     }
 

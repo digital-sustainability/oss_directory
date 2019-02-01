@@ -5,6 +5,9 @@ import { Product } from "./product";
 import { SuccessStory } from "./success_story";
 import { Vendor } from "./vendor";
 import { Community } from "./community";
+import { Category } from "./category";
+import { View } from "./view";
+import { Language } from "./language";
 
 export class Factory{
 
@@ -23,6 +26,12 @@ export class Factory{
                 return new Organisation();
             case DataTypes.Community:
                 return new Community();
+            case DataTypes.Category:
+                return new Category();
+            case DataTypes.View:
+                return new View();
+            case DataTypes.Language:
+                return new Language();
             default:
                 return null; //throw error
         }
@@ -37,4 +46,7 @@ export enum DataTypes {
     Community = "community",
     SuccessStory = "successstory",
     Product = "product",
+    Category = "category",
+    View = "view",
+    Language = "language",
 }

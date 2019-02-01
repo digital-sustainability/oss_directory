@@ -7,6 +7,7 @@ import { ProductFormComponent } from '../../views/product/product-form/product-f
 import { ReferenceFormComponent } from '../../views/reference/reference-form/reference-form.component';
 import { VendorFormComponent } from '../../views/vendor/vendor-form/vendor-form.component';
 import { MaterialDesignModule } from '../../shared/material-design/material-design.module';
+import { ViewerModule } from '../viewer/viewer.module';
 import { FormsModule } from '@angular/forms';
 
 /**
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     EditorRoutingModule,
     MaterialDesignModule,
-    FormsModule
+    ViewerModule,
+    FormsModule,
   ],
   declarations: [
     FormComponent,

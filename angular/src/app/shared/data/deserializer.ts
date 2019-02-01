@@ -21,5 +21,6 @@ export class Deserializer{
                 delete data[prop]; //if the identifier is inside another table entry then the identifier will be removed as well!
             }
         }
+        return data;
     }
 }

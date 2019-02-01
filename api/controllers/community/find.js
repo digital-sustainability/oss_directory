@@ -34,7 +34,7 @@ module.exports = {
     for (let item of communities){
 
       let org = await Organisation.findOne({ id : item.organisation.id})
-        .populate('translations', { where: { language : 'EN'}})
+        .populate('translations', { where: { language : 1}})
         .populate('view');
 
       item.organisation = org;

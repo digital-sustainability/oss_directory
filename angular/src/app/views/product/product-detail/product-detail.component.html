@@ -1,8 +1,26 @@
-<h4>Product Detail Component</h4>
+<div *ngIf='product'>
+  <mat-card-title-group> 
+      <mat-card-title *ngIf='product.title'>{{product.title}}</mat-card-title>
+      <mat-card-subtitle *ngIf='product.category'>{{product.category.title}}</mat-card-subtitle>
+      <img mat-card-md-image src="./assets/img/cof_orange_hex.png">
+  </mat-card-title-group>
 
-<div *ngIf='data'>
-  <p>Id: {{data.id}}</p>
-  <br>
-  <p>Title: {{data.title}}</p>
-  <br>
+  <mat-card-content *ngIf='product.translation'>
+    {{product.translation.description}}
+  </mat-card-content>
+
+  <div *ngIf='product.links'>
+    <p>Links: </p>
+    <p>{{product.links}}</p>
+  </div>
+
+  <div *ngIf='product.source_code_link'>
+    <p>Source Code:</p>
+    <a href='product.source_code_link'>{{product.source_code_link}}</a>
+  </div>
+
+  <div *ngFor='let vendor of vendors'>
+    <p>Vendor</p>
+  </div>
+
 </div>

@@ -40,10 +40,6 @@ export class FormComponent implements OnInit {
     this.setup();
   }
 
-  ngOnChanges() {
-
-  }
-
   setup() {
     
     let obs = this.route.params.pipe(
@@ -58,10 +54,9 @@ export class FormComponent implements OnInit {
         } else {
           return of(data);
         }
-      }), share() //to make sure not to send the request multiple this (e.g. here and vendor-form)
+      })
     );
-    this.data = obs;
-    obs.subscribe(data => this.data = data);
+    obs.subscribe(res => this.data = res);
   }
 
   private submit(){

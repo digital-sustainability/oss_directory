@@ -11,7 +11,7 @@ export class SuccessStory extends ApiData {
     public constructor() {
         super();
         if(!this.translations.length){
-            this.translations.push(new Translation());
+            this.translations.push(new SuccessStoryTranslation());
         }
     }
 
@@ -38,7 +38,7 @@ export class SuccessStory extends ApiData {
     }
 }
 
-export class Translation extends ApiData{
+export class SuccessStoryTranslation extends ApiData{
 
     language : string = null;
     title : string = null;
@@ -50,11 +50,11 @@ export class Translation extends ApiData{
 
 
     public setIdentifier(id : string ){
-        this.id = id;
+        this.title = id;
     }
 
     public getIdentifier() : string {
-        return this.id;
+        return this.title;
     }
 
     protected _deserialize(input : any) : ApiData {

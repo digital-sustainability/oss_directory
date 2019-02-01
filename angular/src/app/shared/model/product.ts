@@ -1,5 +1,4 @@
 import { ApiData } from "../data/api-data";
-import { Deserializer } from "../data/deserializer";
 
 export class Product extends ApiData{
 
@@ -8,12 +7,14 @@ export class Product extends ApiData{
     logo_pixel : string = null;
     title : string = null;
     links : string = null;
-    source_code_url : string = null;
+    source_code_link : string = null;
     
     user : any = null;
-    translations : any[] = null;
+    translations : any[] = [];
     vendors : any[] = null;
     views : any[] = null;
+
+    translation : ProductTranslation = null;
 
     public setIdentifier(id : string ){
         this.title = id;
@@ -24,6 +25,13 @@ export class Product extends ApiData{
     }
 
     protected _deserialize(input : any) : ApiData {
+        if (!input.translations) return this;
+        this.translations = [];
+        for (let trans of input.translations){
+            let translation = new ProductTranslation().deserialize(trans);
+            this.translations.push(translation);
+        }
+        if (this.translations[0]) this.translation = this.translations[0];
         return this;
     }
 
@@ -38,23 +46,32 @@ export class Product extends ApiData{
     public isValid() : boolean{
         return true;
     }
+
+    public changeTranslation(trans : ProductTranslation) {
+        //maybe check if it is valid?
+        this.translation = trans;
+    }
 }
 
-export class Translation extends ApiData{
+export class ProductTranslation extends ApiData{
 
-    language : string;
-    description : string;
+    no_identifier : string;
+
+    
+
+    language : number = null;
+    description : string = null;
+    product : number
 
     public setIdentifier(id : string ){
-        this.id = id;
+        this.no_identifier = id;
     }
 
     public getIdentifier() : string {
-        return this.id;
+        return this.no_identifier;
     }
 
     protected _deserialize(input : any) : ApiData {
-        Deserializer.deserialize(this, input);
         return this;
     }
 

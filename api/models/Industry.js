@@ -9,9 +9,7 @@ module.exports = {
 
   tableName: 'industry',
   attributes: {
-    title: {
-      type: 'string'
-    },
+    title: { type: 'string', unique : true, required : true },
   }
 
 };

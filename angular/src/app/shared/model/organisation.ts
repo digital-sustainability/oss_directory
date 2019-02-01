@@ -9,7 +9,7 @@ export class Organisation extends ApiData{
     logo_pixel : string = null;
 
     address: any = null;
-    translations : Translation[] = null;
+    translations : OrganisationTranslation[] = null;
     users : any[] = null;
     view : any = null;
 
@@ -23,7 +23,6 @@ export class Organisation extends ApiData{
     }
 
     protected _deserialize(input : any) : Organisation {
-        Deserializer.deserialize(this, input);
         return this;
     }
 
@@ -42,7 +41,9 @@ export class Organisation extends ApiData{
     }
 }
 
-export class Translation extends ApiData {
+export class OrganisationTranslation extends ApiData {
+
+    no_identifier : string;
 
     language : string;
     description : string;
@@ -50,15 +51,14 @@ export class Translation extends ApiData {
     claim : string;
 
     public setIdentifier(id : string){
-        this.id = id;
+        this.no_identifier = id;
     }
 
     public getIdentifier() : string{
-        return this.id;
+        return this.no_identifier;
     }
 
     protected _deserialize(input : any) : ApiData {
-        Deserializer.deserialize(this, input);
         return this;
     }
 

@@ -68,11 +68,6 @@ module.exports = {
     organisation : {
       model : 'organisation'
     },
-
-    product : {
-      collection : 'product',
-      via : 'user'
-    }
   },
 
   customToJSON: function() {

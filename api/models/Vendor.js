@@ -4,49 +4,37 @@ module.exports = {
   tableName: 'vendor',
   attributes: {
 
-    website : { type : 'string',} ,
-    locations : { type : 'string'},
-    employee_num : {
-      type : 'number'
+    website     : { type: 'string', },
+    locations   : { type: 'string', },
+    employee_num: { type: 'number', },
+
+    success_stories: { 
+      collection: 'successstory',
+      via       : 'vendor',
     },
 
-    success_story : {
-      collection : 'successstory',
-      via : 'vendor',
+    communities: { 
+      collection: 'community',
+      via       : 'vendors',
     },
 
-    communities : {
-      collection : 'community',
-      via : 'vendors'
+    organisation: 
+    {
+      model   : 'organisation',
+      required: true,
     },
-
-    organisation : {
-      model : 'organisation'
-    }
-
   },
 
-  populateStrategy : async function (vendor, where) {
+  populateStrategy: async function (vendor, where) {
     if (!vendor.organisation) return;
-    let org = await Organisation.findOne({ id : vendor.organisation.id})
-      .populate('translations', { where : where.translations })
+    if (!vendor.organisation.id) return;
+    let org = await Organisation.findOne({ id: vendor.organisation.id })
+      .populate('translations', { where: where.translations })
       .populate('view')
       .populate('address');
 
     vendor.organisation = org;
     return vendor;
-  },
-
-  cascadeCreate : async function (vendor){
-
-    let organisation = await Organisation.cascadeCreate(vendor.organisation);
-    delete vendor.organisation;
-
-    let result = await Vendor.create(vendor).fetch();
-    await Vendor.updateOne({ id : result.id}).set({ organisation : organisation.id });
-
-    return result;
-
   }
 };
 

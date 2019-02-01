@@ -3,7 +3,7 @@ import { Deserializer } from "./deserializer";
 export abstract class ApiData {
 
     public input : any;
-    public id : string;
+    public id : number;
 
     public createdAt;
     public updatedAt;

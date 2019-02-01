@@ -24,13 +24,8 @@ export class ApiDataProxy {
         console.log("could not create");
       }
       let url = this.url.create(data);
-      for (let prop in data){
-        if (typeof(data[prop]) == 'object'){
-          delete data[prop]; //not the best way but works for now
-          //TODO: find solution for populated relation entries (update only allows ID and not the whole entry)
-        }
-      }
-			return this.http.post(url, data);
+      let create = data.serialize();
+			return this.http.post(url, create);
 		}
 
 
@@ -57,15 +52,12 @@ export class ApiDataProxy {
       if (!data.isValid()){
         console.log("could not update");
       }
-
-      for (let prop in data){
-        if (typeof(data[prop]) == 'object'){
-          delete data[prop]; //not the best way but works for now
-          //TODO: find solution for populated relation entries (update only allows ID and not the whole entry)
-        }
-      }
       let url = this.url.update(data);
-      return this.http.patch(url, data);
+
+
+      let update = data.serialize();
+
+      return this.http.patch(url, update);
     }
 
     public delete(data : ApiData){

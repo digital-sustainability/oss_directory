@@ -1,4 +1,7 @@
-<mat-card-subtitle>Product List Item Component</mat-card-subtitle>
 
-<mat-card-title>{{item.title}} </mat-card-title>
-<p>{{item.id}}</p>
+
+<mat-card-header *ngIf='item'>
+    <img mat-card-avatar src="./assets/img/cof_orange_hex.png">
+    <mat-card-title *ngIf='item.title'>{{item.title}}</mat-card-title>
+    <mat-card-subtitle *ngIf='item.category'>{{item.category.title}}</mat-card-subtitle>
+</mat-card-header>

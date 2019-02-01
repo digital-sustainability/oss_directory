@@ -1,8 +1,123 @@
-<h3>Product Form Component</h3>
+<div *ngIf='product'>
 
-<div *ngIf='data'>
-  <p>Id: {{data.id}}</p>
-  <br>
-  <p>Title: {{data.title}}</p>
-  <br>
+  <mat-horizontal-stepper linear>
+   
+    <mat-step label="Information" [stepControl]="information">
+      <form #information="ngForm">
+
+      <mat-form-field>
+        <mat-label>Enter a title</mat-label>
+        <input matInput id="title" name="title"
+          required
+          [(ngModel)]='product.title' #title="ngModel">
+        <mat-error *ngIf='title.invalid'>Title required</mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Select category</mat-label>
+        <mat-select id="category" name="category"
+          required
+          [(ngModel)]='product.category' #category="ngModel">
+            <mat-option *ngFor="let category of categories" [value]="category">
+                {{category.title}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf='category.invalid'>Category required</mat-error>
+
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Product Vector Logo</mat-label>
+        <input matInput id="logo_vector" name="logo_vector"
+          [(ngModel)]='product.logo_vector' #logo_vector="ngModel">
+        <mat-hint>Vector Image upload coming soon!</mat-hint>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Product Bitmap Logo</mat-label>
+        <input matInput id="logo_pixel" name="logo_pixel"
+          [(ngModel)]='product.logo_pixel' #logo_pixel="ngModel">
+        <mat-hint>Bitmap Image upload coming soon!</mat-hint>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Provide Links</mat-label>
+        <input matInput id="links" name="links"
+          [(ngModel)]='product.links' #links="ngModel">
+        <mat-hint>Comma separated links</mat-hint>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Where can i download this?</mat-label>
+        <input matInput id="source_code_url" name="source_code_url"
+          [(ngModel)]='product.source_code_link' #source_code_url="ngModel">
+        <mat-hint>Source Code Url</mat-hint>
+      </mat-form-field>
+  
+    </form>
+
+    </mat-step>
+    <mat-step label="Descriptions" [stepControl]="description">
+
+      <form #description="ngForm">
+
+      <mat-tab-group>
+
+        <mat-tab *ngFor="let trans of translations; index as i;">
+          <ng-template mat-tab-label>{{langNameById(trans.language)}}</ng-template>
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput id="description{{i}}" name="description{{i}}"
+              [(ngModel)]='trans.description' #description{{i}}="ngModel"></textarea>
+            
+          </mat-form-field>
+        </mat-tab>
+        <mat-tab *ngFor="let opts of language_opts">
+          <ng-template mat-tab-label>{{opts.name}}</ng-template>
+            <button (click)="addTranslation(opts)">Add</button>
+        </mat-tab>
+      </mat-tab-group>
+    </form>
+   
+    </mat-step>
+
+    
+
+    <mat-step label="Preview">
+      <mat-tab-group (selectedTabChange)="tabChanged($event)">
+        <mat-tab *ngFor="let trans of translations">
+            <ng-template mat-tab-label>
+              {{langNameById(trans.language)}}
+            </ng-template>
+            <app-product-detail [data]="product"></app-product-detail>
+        </mat-tab>
+      </mat-tab-group>
+      
+
+      
+
+
+    </mat-step>
+
+
+    <mat-step label="Send">
+
+      <button (click)="send()">Send</button>
+
+    </mat-step>
+
+
+
+  </mat-horizontal-stepper>
+
 </div>

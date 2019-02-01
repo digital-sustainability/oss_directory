@@ -32,7 +32,7 @@ module.exports = {
     //TODO: maybe references and product hints as well
 
     for (let item of vendors){
-      item = await Vendor.populateStrategy(item, { translation : { language : 'EN'}})
+      item = await Vendor.populateStrategy(item, { translation : { language : 1}})
       results.push(item);
     }
 

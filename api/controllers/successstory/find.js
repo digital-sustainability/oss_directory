@@ -20,7 +20,7 @@ module.exports = {
   fn: async function (inputs, exits) {
 
     let success_stories = await SuccessStory.find()
-      .populate('translations', { where : { language : 'EN'}})
+      .populate('translations', { where : { language : 1}})
       .populate('products');
 
     return exits.success(success_stories);
