@@ -34,6 +34,7 @@ module.exports = {
       .populate('address');
 
     vendor.organisation = org;
+
     return vendor;
   }
 };

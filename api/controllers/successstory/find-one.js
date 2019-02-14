@@ -9,7 +9,7 @@ module.exports = {
 
   inputs: {
 
-    id : { type : 'string'},
+    id : { type : 'ref'},
 
   },
 
@@ -21,17 +21,20 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    let translation = await SuccessStoryTranslation.findOne({ title : inputs.id});
+    let success_story;
+    if (isNaN(inputs.id)){
+      let translation = await SuccessStoryTranslation.findOne({ title : inputs.id});
 
-    let success_story = await SuccessStory.findOne({id : translation.success_story})
+      success_story = await SuccessStory.findOne({id : translation.success_story})
       .populate('translations', { where : { title : inputs.id }})
       .populate('products')
       .populate('vendor')
       .populate('client');
+    } else {
+      success_story = await SuccessStory.findOne({ id : inputs.id}).populateAll();
+    }
 
     return exits.success(success_story);
-
-
   }
 
 

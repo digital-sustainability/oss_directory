@@ -17,12 +17,13 @@ export class ApiUrl {
     }
 
     public find(data : ApiData) : string {
-        if (data.getIdentifier()) return this.findOne(data);
-        return environment.apiURL + "api/" + data.getName();
+        let findOne = this.findOne(data);
+        return findOne ? findOne : environment.apiURL + "api/" + data.getName();
     }
 
     public findOne(data : ApiData) : string {
-        return environment.apiURL + "api/" + data.getName() + "/" + data.getIdentifier();
+        if (data.getIdentifier()) return environment.apiURL + "api/" + data.getName() + "/" + data.getIdentifier();
+        if (data.id) return environment.apiURL + "api/" + data.getName() + "/" + data.id;
     } 
 
     public delete() : string {

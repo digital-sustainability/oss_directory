@@ -5,13 +5,16 @@ module.exports = async function (req, res, next) {
         let path = req.path.toLowerCase();
         let method = req.method.toLowerCase();
         let action = 
-                await Action.findOne({path: path, method: method}).populate('permissions'); 
+                await Action.findOne({path: path, method: method}).populate('permission'); 
 
         if (!action) 
         {
                 return next();
+
+                //log that no action is defined!!
         }
 
+        //in order to be authorized a user has to be logged in
         if (!req.isAuthenticated())
         {
                 res.status(401).json();

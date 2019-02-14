@@ -1,6 +1,6 @@
 module.exports = {
 
-  tableName: 'roles',
+  tableName: 'role',
   attributes: {
     name: {
       type: 'string',

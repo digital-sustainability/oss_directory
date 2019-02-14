@@ -9,7 +9,7 @@ module.exports = {
 
   inputs: {
 
-    id : { type : 'string'}
+    id : { type : 'ref'}
 
   },
 
@@ -21,8 +21,14 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    let org = await Organisation.findOne({ title : inputs.id });
-    let community = await Community.findOne({ organisation : org.id }).populateAll();
+    let community;
+    if(isNaN(inputs.id)){
+
+      let org = await Organisation.findOne({ title : inputs.id });
+      community = await Community.findOne({ organisation : org.id }).populateAll();
+    } else {
+      community = await Community.findOne({ id : inputs.id}).populateAll();
+    }
     let result = await Community.populateStrategy(community, { translation : { language : 1}});
 
     return exits.success(result);
