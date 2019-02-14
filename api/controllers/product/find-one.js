@@ -10,7 +10,7 @@ module.exports = {
   inputs: {
 
     id : {
-      type : 'string'
+      type : 'ref'
     }
   },
 
@@ -21,7 +21,13 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    let product = await Product.findOne({title : inputs.id}).populateAll();
+    let product;
+    if (isNaN(inputs.id)){
+
+      product = await Product.findOne({title : inputs.id}).populateAll();
+    } else {
+      product = await Product.findOne({ id : inputs.id}).populateAll();
+    }
 
     let results = [];
 

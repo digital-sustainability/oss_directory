@@ -1,7 +1,7 @@
 
 module.exports = {
 
-  tableName: 'permissions',
+  tableName: 'permission',
   attributes: {
 
     name: {
@@ -17,7 +17,7 @@ module.exports = {
 
     actions: {
       collection: 'action',
-      via: 'permissions'
+      via: 'permission'
     }
   }
 };

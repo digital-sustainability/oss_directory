@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, zip } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ApiDataProxy } from './api-data-proxy';
 import { ApiUrl } from '../url/api-url';
@@ -41,6 +41,24 @@ export class DataProviderService {
                 }
             })
         );
+    }
+
+    /**
+     * Return a list of all associations based on a provided list with objects
+     * Make sure that all objects have an id attribute
+     * @param type 
+     * @param list 
+     */
+    public getDataAssociations(type : ApiData, list : any[]) : any[] {
+
+        let results = [];
+        for (let item of list){
+            type.id = item.id;
+            let obs = this.proxy.read(type);
+            obs.subscribe(res => results.push(res));
+        }
+        return results;
+        
     }
 
     /**

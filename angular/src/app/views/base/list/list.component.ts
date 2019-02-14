@@ -4,6 +4,11 @@ import { DataProviderService } from '../../../shared/data/data-provider.service'
 import { ApiData } from '../../../shared/data/api-data';
 import { Observable } from 'rxjs';
 import { Setup } from '../../setup';
+import { Vendor } from '../../../shared/model/vendor';
+import { Client } from '../../../shared/model/client';
+import { Community } from '../../../shared/model/community';
+import { Product } from '../../../shared/model/product';
+import { SuccessStory } from '../../../shared/model/success_story';
 
 @Component({
   selector: 'app-list',
@@ -25,7 +30,4 @@ export class ListComponent extends Setup implements OnInit {
     this.readType().subscribe(type => this.type = type);
     this.requestData().subscribe(data => this.data = data);
   }
-
-
-
 }
