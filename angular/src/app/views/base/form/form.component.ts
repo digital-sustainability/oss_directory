@@ -15,7 +15,7 @@ import { of, Observable } from 'rxjs';
 })
 export class FormComponent implements OnInit {
 
-  private type : string;
+  public type : string;
   private data : ApiData;
 
   private proxy : ApiDataProxy;

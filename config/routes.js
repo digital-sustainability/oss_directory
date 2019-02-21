@@ -28,7 +28,7 @@ module.exports.routes = {
    * Route every request except of api and cookie calls to Angular's index.html.
    */
   'get /*': {
-    view: 'pages/homepage',
+    action: 'home',
     skipAssets: true,
     skipRegex: /^(\/api)|(\/__getcookie)/
   },

@@ -10,7 +10,7 @@ import { ApiData } from '../../../shared/data/api-data';
 })
 export class DetailComponent implements OnInit {
 
-  private data : ApiData;
+  public data : ApiData;
   private type : string;
 
   constructor(private route : ActivatedRoute, 

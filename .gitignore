@@ -134,3 +134,4 @@ lib-cov
 *documentation/
 .vscode
 local.js
+assets

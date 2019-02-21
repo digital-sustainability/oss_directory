@@ -9,7 +9,7 @@ import { Product } from '../../../shared/model/product';
 })
 export class ProductDetailComponent implements OnInit {
 
-  private product : Product;
+  public product : Product;
 
   @Input() set data(data : ApiData) {
     if(data) this.product = data as Product;

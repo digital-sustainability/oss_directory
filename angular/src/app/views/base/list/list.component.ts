@@ -17,7 +17,7 @@ import { SuccessStory } from '../../../shared/model/success_story';
 })
 export class ListComponent extends Setup implements OnInit {
 
-  private type : string;
+  public type : string;
   private data : ApiData[];
 
   constructor(
@@ -29,22 +29,5 @@ export class ListComponent extends Setup implements OnInit {
   ngOnInit() {
     this.readType().subscribe(type => this.type = type);
     this.requestData().subscribe(data => this.data = data);
-    this.test();
-  }
-
-  test(){
-    let x = [{id : 1},{id : 2}];
-    let vendor = new Vendor();
-    console.log(this.provider.getDataAssociations(vendor, x));
-    let client = new Client();
-    console.log(this.provider.getDataAssociations(client, x));
-    let community = new Community();
-    console.log(this.provider.getDataAssociations(community, x));
-    let product = new Product();
-    console.log(this.provider.getDataAssociations(product, x));
-    let success_story = new SuccessStory();
-    console.log(this.provider.getDataAssociations(success_story, x));
-    
-
   }
 }

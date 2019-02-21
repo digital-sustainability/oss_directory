@@ -14,7 +14,7 @@ import { ApiUrl } from '../../../shared/url/api-url';
 })
 export class VendorFormComponent implements OnInit {
 
-  private vendor : Vendor;
+  public vendor : Vendor;
   private organisation : Organisation;
   private translations : OrganisationTranslation[] = [];
 

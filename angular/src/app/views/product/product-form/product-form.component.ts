@@ -28,7 +28,7 @@ export class ProductFormComponent implements OnInit {
   private languages : Language[] = [];
   private language_opts : Language[] = [];
 
-  private product : Product;
+  public product : Product;
   private translations : ProductTranslation[] = []
 
   //Will be converted into a service later on
