@@ -49,11 +49,12 @@ export class DataProviderService {
      * @param type 
      * @param list 
      */
-    public getDataAssociations(type : ApiData, list : any[]) : any[] {
+    public getDataAssociations(type : ApiData, list : ApiData[]) : any[] {
 
         let results = [];
         for (let item of list){
             type.id = item.id;
+            type.setIdentifier(item.getIdentifier());
             let obs = this.proxy.read(type);
             obs.subscribe(res => results.push(res));
         }

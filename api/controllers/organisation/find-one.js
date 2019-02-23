@@ -12,6 +12,7 @@ module.exports = {
     id : {
       type : 'ref'
     }
+
   },
 
 
@@ -19,18 +20,17 @@ module.exports = {
 
   },
 
+
   fn: async function (inputs, exits) {
 
-    let product;
+    let org;
     if (isNaN(inputs.id)){
 
-      product = await Product.findOne({title : inputs.id}).populateAll();
+      org = await Organisation.findOne({title : inputs.id}).populateAll();
     } else {
-      product = await Product.findOne({ id : inputs.id}).populateAll();
+      org = await Organisation.findOne({ id : inputs.id}).populateAll();
     }
-
-    return exits.success(product);
-
+    return exits.success(org);
   }
 
 

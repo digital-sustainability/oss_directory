@@ -45,6 +45,7 @@ module.exports.routes = {
   'get /api/client/:id' : 'client/find-one',
   'get /api/community/:id' : 'community/find-one',
   'get /api/successstory/:id' : 'successstory/find-one',
+  'get /api/organisation/:id' : 'organisation/find-one',
 
   'patch /api/vendor/:id' : 'vendor/update-one',
   'patch /api/product/:id' : 'product/update-one',

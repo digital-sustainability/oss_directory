@@ -1,4 +1,5 @@
 import { ApiData } from "../data/api-data";
+import { Organisation } from "./organisation";
 
 export class Product extends ApiData{
 
@@ -11,7 +12,7 @@ export class Product extends ApiData{
     
     user : any = null;
     translations : any[] = [];
-    vendors : any[] = null;
+    organisations : Organisation[] = [];
     views : any[] = null;
 
     translation : ProductTranslation = null;
@@ -25,13 +26,21 @@ export class Product extends ApiData{
     }
 
     protected _deserialize(input : any) : ApiData {
-        if (!input.translations) return this;
+        if (input.translations) {
         this.translations = [];
         for (let trans of input.translations){
             let translation = new ProductTranslation().deserialize(trans);
             this.translations.push(translation);
         }
         if (this.translations[0]) this.translation = this.translations[0];
+        }
+        this.organisations = [];
+        if (input.organisations){
+        for (let org of input.organisations){
+            let organisation = new Organisation().deserialize(org) as Organisation;
+            this.organisations.push(organisation);
+        }
+        }
         return this;
     }
 
