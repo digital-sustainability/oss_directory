@@ -3,7 +3,6 @@ import { Vendor } from '../../../shared/model/vendor';
 import { Organisation, OrganisationTranslation } from '../../../shared/model/organisation';
 import { ApiData } from '../../../shared/data/api-data';
 import { Observable } from 'rxjs';
-import { ApiDataProxy } from '../../../shared/data/api-data-proxy';
 import { HttpService } from '../../../shared/sails/http.service';
 import { ApiUrl } from '../../../shared/url/api-url';
 
@@ -23,15 +22,11 @@ export class VendorFormComponent implements OnInit {
   @Input() data : Observable<ApiData>;
 
   @Output() _submit : EventEmitter<ApiData> = new EventEmitter();
-  constructor(private http : HttpService, private url : ApiUrl) { 
-
-    this.proxy = new ApiDataProxy(this.http, this.url);
-  }
+  constructor(private http : HttpService, private url : ApiUrl) {}
 
   ngOnInit() {
     this.data.subscribe(res => {
       this.vendor = res as Vendor;
-      this.organisation = this.vendor.organisation;
       //translations as well
     });
   }

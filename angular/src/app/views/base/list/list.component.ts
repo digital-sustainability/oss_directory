@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
-import { DataProviderService } from '../../../shared/data/data-provider.service';
+import { DataService } from '../../../shared/data/data.service';
 import { ApiData } from '../../../shared/data/api-data';
 import { Observable } from 'rxjs';
 import { Setup } from '../../setup';
@@ -22,7 +22,7 @@ export class ListComponent extends Setup implements OnInit {
 
   constructor(
     protected route : ActivatedRoute, 
-    protected provider : DataProviderService) { 
+    protected provider : DataService) { 
       super();
     }
 

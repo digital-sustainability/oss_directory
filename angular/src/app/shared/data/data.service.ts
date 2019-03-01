@@ -2,26 +2,26 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, zip } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { ApiDataProxy } from './api-data-proxy';
 import { ApiUrl } from '../url/api-url';
 import { HttpService } from '../sails/http.service';
 import { Factory } from '../model/factory';
 import { ApiData } from './api-data';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class DataProviderService {
+export class DataService {
 
-    private proxy : ApiDataProxy
     
     constructor(
         private http : HttpService,
-        private url : ApiUrl ){
-            this.proxy = new ApiDataProxy(this.http, this.url);
-        }
+        private url : ApiUrl ){}
 
+    public send(graphql_request : string) : Observable<any> {
+        return this.http.post(environment.graphQlUrl, graphql_request);
+    }
 
     /**
      * Retrieves data based on the given route
@@ -35,31 +35,12 @@ export class DataProviderService {
             {
                 if(data)
                 {
-                    return this.proxy.read(data);
+                    return this.send(data.read());
                 } else {
                     //TODO: exception handling
                 }
             })
         );
-    }
-
-    /**
-     * Return a list of all associations based on a provided list with objects
-     * Make sure that all objects have an id attribute
-     * @param type 
-     * @param list 
-     */
-    public getDataAssociations(type : ApiData, list : ApiData[]) : any[] {
-
-        let results = [];
-        for (let item of list){
-            type.id = item.id;
-            type.setIdentifier(item.getIdentifier());
-            let obs = this.proxy.read(type);
-            obs.subscribe(res => results.push(res));
-        }
-        return results;
-        
     }
 
     /**
@@ -71,8 +52,8 @@ export class DataProviderService {
         let type = params['type'];
         let id = params['id']; //for seo links we use names and titles as ID
 
-        let data = Factory.createNew(type);
-        if (data) data.setIdentifier(id);
+        let data = Factory.create(type);
+        if (data) data.identifier = id;
         return data;
     }
 

@@ -1,5 +1,5 @@
 import { ActivatedRoute} from '@angular/router';
-import { DataProviderService } from '../shared/data/data-provider.service';
+import { DataService } from '../shared/data/data.service';
 
 /**
  * Setup class for views
@@ -8,7 +8,7 @@ import { DataProviderService } from '../shared/data/data-provider.service';
 export abstract class Setup {
 
   protected abstract route : ActivatedRoute;
-  protected abstract provider : DataProviderService;
+  protected abstract provider : DataService;
 
   constructor() { }
 

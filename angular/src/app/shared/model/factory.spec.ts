@@ -1,4 +1,5 @@
-import { DataTypes, Factory } from './factory';
+import { Factory } from './factory';
+import { DataTypes } from "./types";
 
 describe('Factory', () => {
 
@@ -8,12 +9,12 @@ describe('Factory', () => {
 
   for (let item in DataTypes) {
 		it ('should create: ' + item, () => {
-			let result = Factory.createNew(item);
+			let result = Factory.create(item);
 			expect(result).toBeTruthy();
 		});
 	}
-
+	
 	it ('should throw if false name is provided', () => {
-		expect(Factory.createNew.bind(null, "test")).toThrow();
+		expect(Factory.create.bind(null, "test")).toThrow();
 	})
 });

@@ -1,32 +1,16 @@
-import { Organisation } from "./organisation";
 import { ApiData } from "../data/api-data";
-import { Deserializer } from "../data/deserializer";
 
-export class View extends ApiData{
+export abstract class View extends ApiData {
 
     no_identifier : string;
     counter : number = null;
 
-    public setIdentifier(id : string){
+    public set identifier(id : string){
         this.no_identifier = id;
     }
 
-    public getIdentifier() : string {
+    public get identifier() : string {
         return this.no_identifier;
     }
-
-    protected _deserialize(input : any) : ApiData {
-        return this;
-    }
-
-    protected _serialize() : any {
-        return this;
-    }
-
-    public isValid() : boolean{
-        return true;
-    }
-
-    public test() {}
 
 }

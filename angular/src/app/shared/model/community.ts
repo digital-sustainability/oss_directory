@@ -1,41 +1,30 @@
+
+import { Query } from "../graphql/query";
+import { Mutation } from "../graphql/mutation";
 import { Organisation } from "./organisation";
 import { ApiData } from "../data/api-data";
 import { Deserializer } from "../data/deserializer";
+import { DataTypes } from "./types";
+import { Status } from "./status";
 
-export class Community extends ApiData {
+export class Community extends Organisation {
 
-    organisation : Organisation = new Organisation();
+    website : string    | Status = Status.Empty;
+    vendors : ApiData[] | Status = Status.Empty;
+    clients : ApiData[] | Status = Status.Empty;
+    products: ApiData[] | Status = Status.Empty;
 
-    website : string = null;
-    
-    vendors : any[] = null;
-    clients : any[] = null;
-    products : any[] = null;
-
-    public setIdentifier(id : string){
-        this.organisation.setIdentifier(id);
-    }
-
-    public getIdentifier() : string {
-        return this.organisation.getIdentifier();
-    }
-
-    protected _deserialize(input : any) : ApiData{
-        Deserializer.deserialize(this, input);
-        this.organisation = new Organisation().deserialize(input.organisation) as Organisation;
+    public deserialize(input : any){
+        super.deserialize(input);
+        this.vendors = Deserializer.deserializeAll(this.vendors, this.factory, DataTypes.Vendor);
+        this.clients = Deserializer.deserializeAll(this.clients, this.factory, DataTypes.Client);
+        this.products = Deserializer.deserializeAll(this.products, this.factory, DataTypes.Product);
         return this;
     }
 
-    protected _serialize() : any {
-        let object = JSON.parse(this.input);
-        if (object['organisation'] && object['organisation']['id']) {
-            object['organisation'] = object['organisation']['id'];
-        }
-        return object;
-    }
-
-    public isValid() : boolean{
-        return true;
-    }
+    public read() : string { return Query.Community; }
+    public create() : string { return Mutation.createCommunity; }
+    public update() : string { return Mutation.updateCommunity; }
+    public delete() : string { return Mutation.deleteCommunity; }
 
 }

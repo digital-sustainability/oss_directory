@@ -1,44 +1,31 @@
+import { Query } from "../graphql/query";
+import { Mutation } from "../graphql/mutation";
 import { Organisation } from "./organisation";
-import { ApiData } from "../data/api-data";
+import { ApiData} from "../data/api-data";
 import { Deserializer } from "../data/deserializer";
+import { DataTypes } from "./types";
+import { Status } from "./status";
 
-export class Client extends ApiData {
+export class Client extends Organisation {
 
-    organisation : Organisation = new Organisation();
+    industry        : string    | Status  = Status.Empty;
+    products        : ApiData[] | Status  = Status.Empty;
+    vendors         : ApiData[] | Status  = Status.Empty;
+    communities     : ApiData[] | Status  = Status.Empty;
+    success_stories : ApiData[] | Status  = Status.Empty;
 
-    industry : string = null;
-
-    products : any[] = null;
-    vendors : any[] = null;
-    communities : any[] = null;
-    success_stories : any[] = null;
-
-    public setIdentifier(id : string ){
-        this.organisation.setIdentifier(id);
-    }
-
-    public getIdentifier() : string {
-        return this.organisation.getIdentifier();
-    }
-
-    protected _deserialize(input : any) : ApiData{
-        this.organisation = new Organisation().deserialize(input.organisation) as Organisation;
+    public deserialize(input : any){
+        super.deserialize(input);
+        this.products = Deserializer.deserializeAll(this.products, this.factory, DataTypes.Product);
+        this.vendors = Deserializer.deserializeAll(this.vendors, this.factory, DataTypes.Vendor);
+        this.communities = Deserializer.deserializeAll(this.communities, this.factory, DataTypes.Community);
+        this.success_stories = Deserializer.deserializeAll(this.success_stories, this.factory, DataTypes.SuccessStory);
         return this;
     }
 
-    protected _serialize() : any {
-        let object = JSON.parse(this.input);
-        if (object['organisation'] && object['organisation']['id']) {
-            object['organisation'] = object['organisation']['id'];
-        }
-        if (object['industry'] && object['industry']['id']) {
-            object['industry'] = object['industry']['id'];
-        }
-        return object;
-    }
-
-    public isValid() : boolean{
-        return true;
-    }
+    public read() : string { return Query.Client; }
+    public create() : string { return Mutation.createClient; }
+    public update() : string { return Mutation.updateClient; }
+    public delete() : string { return Mutation.deleteClient; }
 
 }

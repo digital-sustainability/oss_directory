@@ -1,94 +1,70 @@
+import { Query } from "../graphql/query";
+import { Mutation } from "../graphql/mutation";
 import { ApiData } from "../data/api-data";
-import { Organisation } from "./organisation";
+import { Translation, TranslationHolder } from "./translation.interface";
+import { Deserializer } from "../data/deserializer";
+import { DataTypes } from "./types";
+import { Status } from "./status";
 
-export class Product extends ApiData{
+export class Product extends ApiData implements TranslationHolder {
 
-    category : string = null;
-    logo_vector: string = null;
-    logo_pixel : string = null;
-    title : string = null;
-    links : string = null;
-    source_code_link : string = null;
+    category         : ApiData | Status = Status.Empty;
+    logo             : string | Status = Status.Empty;
+    title            : string | Status = Status.Empty;
+    links            : string | Status = Status.Empty;
+    source_code_link : string | Status = Status.Empty;
     
-    user : any = null;
-    translations : any[] = [];
-    organisations : Organisation[] = [];
-    views : any[] = null;
+    user            : ApiData | Status   = Status.Empty;
+    translations    : ApiData[] | Status = Status.Empty;
+    vendors         : ApiData[] | Status = Status.Empty;
+    clients         : ApiData[] | Status = Status.Empty;
+    communities     : ApiData[] | Status = Status.Empty;
+    success_stories : ApiData[] | Status = Status.Empty;;
+    views           : any[] | Status = Status.Empty;
 
-    translation : ProductTranslation = null;
+    currentTranslation : ProductTranslation | Status = Status.Empty;;
 
-    public setIdentifier(id : string ){
-        this.title = id;
-    }
+    public set identifier(id : string | Status){ this.title = id; }
+    public get identifier() : string | Status { return this.title; }
 
-    public getIdentifier() : string {
-        return this.title;
-    }
+    public deserialize(input : any){
+        Deserializer.deserialize(this, input);
+        let new_category = this.factory.create(DataTypes.Category);
+        if (this.category != Status.Empty) {
+            this.category = new_category.deserialize(this.category);
+        }
+        
+        this.translations = Deserializer.deserializeAll(
+            this.translations,
+            this.factory,
+            DataTypes.ProductTranslation) as ProductTranslation[];
 
-    protected _deserialize(input : any) : ApiData {
-        if (input.translations) {
-        this.translations = [];
-        for (let trans of input.translations){
-            let translation = new ProductTranslation().deserialize(trans);
-            this.translations.push(translation);
-        }
-        if (this.translations[0]) this.translation = this.translations[0];
-        }
-        this.organisations = [];
-        if (input.organisations){
-        for (let org of input.organisations){
-            let organisation = new Organisation().deserialize(org) as Organisation;
-            this.organisations.push(organisation);
-        }
-        }
+        //set current language based on global language field (test if that works correctly)
+
+        this.vendors = Deserializer.deserializeAll(this.vendors, this.factory, DataTypes.Vendor);
+        this.clients = Deserializer.deserializeAll(this.clients, this.factory, DataTypes.Client);
+        this.communities = Deserializer.deserializeAll(this.communities, this.factory, DataTypes.Community);
+        this.success_stories = Deserializer.deserializeAll(this.success_stories, this.factory, DataTypes.SuccessStory);
         return this;
     }
 
-    protected _serialize() : any {
-        let object = JSON.parse(this.input);
-        if (object.category && object.category.id) {
-            object.category = object.category.id;
-        }
-        return object;
-    }
+    public set language(lang : string) {} //set current language field if exists
 
-    public isValid() : boolean{
-        return true;
-    }
-
-    public changeTranslation(trans : ProductTranslation) {
-        //maybe check if it is valid?
-        this.translation = trans;
-    }
+    public read()  : string { return Query.Product; }
+    public create(): string { return Mutation.createProduct; }
+    public update(): string { return Mutation.updateProduct; }
+    public delete(): string { return Mutation.deleteProduct; }
 }
 
-export class ProductTranslation extends ApiData{
+export class ProductTranslation extends ApiData implements Translation{
 
-    no_identifier : string;
+    language    : string | Status = Status.Empty;
+    description : string | Status = Status.Empty;
 
-    
+    public deserialize(input : any){ return Deserializer.deserialize(this, input); }
 
-    language : number = null;
-    description : string = null;
-    product : number
-
-    public setIdentifier(id : string ){
-        this.no_identifier = id;
-    }
-
-    public getIdentifier() : string {
-        return this.no_identifier;
-    }
-
-    protected _deserialize(input : any) : ApiData {
-        return this;
-    }
-
-    protected _serialize() : any {
-        return this;
-    }
-
-    public isValid() : boolean{
-        return true;
-    }
+    public read()  : string { return Query.ProductTranslation; }
+    public create(): string { return Mutation.createProductTranslation; }
+    public update(): string { return Mutation.updateProductTranslation; }
+    public delete(): string { return Mutation.deleteProductTranslation; }
 }

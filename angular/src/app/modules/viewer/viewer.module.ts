@@ -15,7 +15,7 @@ import { ProductDetailComponent } from '../../views/product/product-detail/produ
 import { ReferenceListComponent } from '../../views/reference/reference-list/reference-list.component';
 import { ReferenceListItemComponent } from '../../views/reference/reference-list-item/reference-list-item.component';
 import { ReferenceDetailComponent } from '../../views/reference/reference-detail/reference-detail.component';
-import { DataProviderService } from '../../shared/data/data-provider.service';
+import { DataService } from '../../shared/data/data.service';
 import { ApiUrl } from '../../shared/url/api-url';
 import { MaterialDesignModule } from '../../shared/material-design/material-design.module';
 
@@ -52,7 +52,7 @@ import { MaterialDesignModule } from '../../shared/material-design/material-desi
     ReferenceDetailComponent,
   ],
   providers: [
-    DataProviderService,
+    DataService,
     ApiUrl,
   ],
 })

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ApiData } from '../../../shared/data/api-data';
 import { Product } from '../../../shared/model/product';
 import { Vendor } from '../../../shared/model/vendor';
-import { DataProviderService } from '../../../shared/data/data-provider.service';
+import { DataService } from '../../../shared/data/data.service';
 import { Client } from '../../../shared/model/client';
 import { Community } from '../../../shared/model/community';
 
@@ -21,17 +21,11 @@ export class ProductDetailComponent implements OnInit {
   @Input() set data(data : ApiData) {
     if(data) {
       this.product = data as Product;
-      this.vendors = this.provider.getDataAssociations(new Vendor(), this.product.organisations);
-      this.clients = this.provider.getDataAssociations(new Client(), this.product.organisations);
-      this.community = this.provider.getDataAssociations(new Community(), this.product.organisations);
     }
   }
 
-  constructor(
-    private provider : DataProviderService
-  ) { }
+  constructor(private provider : DataService){}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

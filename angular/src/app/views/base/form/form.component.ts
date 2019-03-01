@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DataProviderService } from '../../../shared/data/data-provider.service';
+import { DataService } from '../../../shared/data/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiData } from '../../../shared/data/api-data';
+import { ApiData} from '../../../shared/data/api-data';
 import { map, switchMap, share } from 'rxjs/operators';
-import { ApiDataProxy } from '../../../shared/data/api-data-proxy';
 import { HttpService } from '../../../shared/sails/http.service';
 import { ApiUrl } from '../../../shared/url/api-url';
 import { of, Observable } from 'rxjs';
+import { Status } from '../../../shared/model/status';
 
 @Component({
   selector: 'app-form',
@@ -18,16 +18,13 @@ export class FormComponent implements OnInit {
   public type : string;
   private data : ApiData;
 
-  private proxy : ApiDataProxy;
 
   constructor(
     private router : Router,
     private route : ActivatedRoute, 
-    private provider : DataProviderService,
+    private provider : DataService,
     private http : HttpService,
-    private url : ApiUrl) { 
-      this.proxy = new ApiDataProxy(http, url);
-    }
+    private url : ApiUrl){}
 
     //maybe create two forms : one for new entries and one for editing?
     //later for different behavior and views
@@ -49,8 +46,8 @@ export class FormComponent implements OnInit {
         return data;
       }),
       switchMap( data => {
-        if (data.getIdentifier()){
-          return this.proxy.read(data);
+        if (data.identifier != Status.Empty){
+          return this.provider.send(data.read());
         } else {
           return of(data);
         }
@@ -60,7 +57,6 @@ export class FormComponent implements OnInit {
   }
 
   private submit(){
-
     //update url maybe on change
   }
 }

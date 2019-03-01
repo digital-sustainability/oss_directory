@@ -47,6 +47,8 @@ module.exports.routes = {
   'get /api/successstory/:id' : 'successstory/find-one',
   'get /api/organisation/:id' : 'organisation/find-one',
 
+  'post /api/neo/test' : 'neo/test',
+
   'patch /api/vendor/:id' : 'vendor/update-one',
   'patch /api/product/:id' : 'product/update-one',
   'patch /api/client/:id' : 'client/update-one',

@@ -1,52 +1,54 @@
+import { Mutation } from "../graphql/mutation";
+import { Query } from "../graphql/query";
 import { Organisation } from "./organisation";
-import { ApiData } from "../data/api-data";
+import { DataTypes } from "./types";
+import { Deserializer } from "../data/deserializer";
+import { ApiData} from "../data/api-data";
+import { Status } from "./status";
 
-export class Vendor extends ApiData {
+export class Vendor extends Organisation {
 
-    organisation : Organisation = new Organisation();
-
-    website : string = null;
-    locations : string = null;
-    employee_num : number = null;
+    website      : string | Status = Status.Empty;
+    locations    : string | Status = Status.Empty;
+    employee_num : number | Status = Status.Empty;
     
-    provided_services : any[] = null;
-    success_stories : any[] = null;
-    communities : any[] = null;
+    products        : ApiData[] | Status = Status.Empty;
+    success_stories : ApiData[] | Status = Status.Empty;
+    communities     : ApiData[] | Status = Status.Empty;
 
-    public setIdentifier(id : string ){
-        this.organisation.setIdentifier(id);
-    }
+    public deserialize(input : any){
+        super.deserialize(input);
+        
+        this.products = Deserializer.deserializeAll(this.products, this.factory, DataTypes.VendorServices);
+        this.communities = Deserializer.deserializeAll(this.communities, this.factory, DataTypes.Community);
+        this.success_stories = Deserializer.deserializeAll(this.success_stories, this.factory, DataTypes.SuccessStory);
 
-    public getIdentifier() : string {
-        return this.organisation.getIdentifier();
-    }
-
-    protected _deserialize(input : any) : Vendor {
-        this.organisation = new Organisation().deserialize(input.organisation) as Organisation;
         return this;
     }
 
-    protected _serialize() : any {
-        let object = JSON.parse(this.input);
-        if (object['organisation'] && object['organisation']['id']) {
-            object['organisation'] = object['organisation']['id'];
-        }
-        return object;
+    public read()  : string { return Query.Vendor; }
+    public create(): string { return Mutation.createVendor; }
+    public update(): string { return Mutation.updateVendor; }
+    public delete(): string { return Mutation.deleteVendor; }
+}
+
+export class VendorServices extends ApiData {
+
+    service_type : string | Status = Status.Empty;
+    product : ApiData | Status = Status.Empty;
+
+    public deserialize(input : any){
+        Deserializer.deserialize(this, input);
+
+        let new_product = this.factory.create(DataTypes.Product);
+        this.product = Deserializer.deserialize(new_product, this.product);
+
+        return this;
     }
 
-    /**
-     * Here we can check if an entry is valid
-     * To be a valid entry a vendor needs to connected to an organisation entry
-     */
-    public isValid() : boolean{
-        if(!this.organisation){
-            console.log(this.getName() + " does not have an organisation associated!");
-            return false;
-        } else if (!this.organisation.id){ //if the organisation does not have an id entry then it is not yet in the database
-            //we could enforce that within the api later on
-            console.log("Organisation has to be created first in the database");
-        } else {
-            return this.organisation.isValid();
-        }
-    }
+    public read()  : string { return Query.Vendor; }
+    public create(): string { return Mutation.createVendor; }
+    public update(): string { return Mutation.updateVendor; }
+    public delete(): string { return Mutation.deleteVendor; }
+
 }

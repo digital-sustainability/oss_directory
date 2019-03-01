@@ -1,73 +1,64 @@
-import { ApiData } from "../data/api-data";
+
+import { Query } from "../graphql/query";
+import { Mutation } from "../graphql/mutation";
+import { ApiData} from "../data/api-data";
+import { Translation, TranslationHolder } from "./translation.interface";
+import { DataTypes } from "./types";
 import { Deserializer } from "../data/deserializer";
+import { Status } from "./status";
 
-export class Organisation extends ApiData{
+export abstract class Organisation extends ApiData implements TranslationHolder {
     
-    title : string = null;
+    title       : string    | Status = Status.Empty;
+    logo_vector : string    | Status = Status.Empty;
+    logo_pixel  : string    | Status = Status.Empty;
+    address     : ApiData   | Status = Status.Empty;
+    translations: OrganisationTranslation[] | Status = Status.Empty;
+    users       : ApiData[] | Status = Status.Empty;
+    view        : ApiData   | Status = Status.Empty;
 
-    logo_vector : string = null;
-    logo_pixel : string = null;
-
-    address: any = null;
-    translations : OrganisationTranslation[] = null;
-    users : any[] = null;
-    view : any = null;
+    currentTranslation : OrganisationTranslation | Status = Status.Empty;;
 
 
-    public setIdentifier(id : string){
-        this.title = id;
+    public set identifier(id : string | Status.Empty ) { this.title = id; }
+    public get identifier() : string | Status.Empty { return this.title; }
+
+    public set language(lang : string | Status.Empty) { } //set the currentTranslation field if exists
+    public get language() : string | Status.Empty 
+    { 
+        return this.currentTranslation != Status.Empty ? this.currentTranslation.language : Status.Empty;
     }
 
-    public getIdentifier() : string{
-        return this.title;
-    }
+    public deserialize(input : any) : ApiData {
+        Deserializer.deserialize(this, input);
+        let address = this.factory.create(DataTypes.Address);
+        this.address = this.address != Status.Empty ? address.deserialize(this.address) : Status.Empty;
 
-    protected _deserialize(input : any) : Organisation {
+        this.translations = Deserializer.deserializeAll(
+            this.translations, 
+            this.factory, 
+            DataTypes.OrganisationTranslation) as OrganisationTranslation[];
+        
+        //set current language based on global language field (test if that works correctly)
+
         return this;
     }
 
-    protected _serialize() : any {
-        this.input = JSON.stringify(this);
-        let object = JSON.parse(this.input);
-        
-        if (object.address && object.address.id) {
-            object.address = object.address.id;
-        }
-        return object;
-    }
-
-    public isValid() : boolean{
-        return true;
-    }
 }
 
-export class OrganisationTranslation extends ApiData {
+export class OrganisationTranslation extends ApiData implements Translation {
 
-    no_identifier : string;
+    language    : string | Status = Status.Empty;
+    description : string | Status = Status.Empty;
+    contact     : string | Status = Status.Empty;
+    claim       : string | Status = Status.Empty;
 
-    language : string;
-    description : string;
-    contact : string;
-    claim : string;
+    public deserialize(input : any){ 
+        return Deserializer.deserialize(this, input); }
 
-    public setIdentifier(id : string){
-        this.no_identifier = id;
-    }
-
-    public getIdentifier() : string{
-        return this.no_identifier;
-    }
-
-    protected _deserialize(input : any) : ApiData {
-        return this;
-    }
-
-    protected _serialize() : any {
-        return this;
-    }
-
-    public isValid() : boolean{
-        return true;
-    }
+    public read()  : string { return Query.OrganisationTranslation; }
+    public create(): string { return Mutation.createOrganisationTranslation; }
+    public update(): string { return Mutation.updateOrganisationTranslation; }
+    public delete(): string { return Mutation.deleteOrganisationTranslation; }
 
 }

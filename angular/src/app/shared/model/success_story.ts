@@ -1,71 +1,70 @@
+import { Mutation } from "../graphql/mutation";
+import { Query } from "../graphql/query";
+import { TranslationHolder, Translation } from "./translation.interface";
 import { ApiData } from "../data/api-data";
+import { Deserializer } from "../data/deserializer";
+import { DataTypes } from "./types";
+import { Status } from "./status";
 
-export class SuccessStory extends ApiData {
+export class SuccessStory extends ApiData implements TranslationHolder {
 
-    translations : any[] = [];
-    views : any[] = null;
-    products : any[] = null;
-    client : any = null;
-    vendor : any = null;
+    translations : SuccessStoryTranslation[] | Status = Status.Empty;
+    products     : ApiData[] | Status                 = Status.Empty;
+    client       : ApiData | Status                   = Status.Empty;
+    vendor       : ApiData | Status                   = Status.Empty;
 
-    public constructor() {
-        super();
-        if(!this.translations.length){
-            this.translations.push(new SuccessStoryTranslation());
-        }
-    }
+    currentTranslation : SuccessStoryTranslation | Status = Status.Empty;;
 
-    //carefull with multiple language support
-    //TODO: test this behavior
-    public getIdentifier() : string {
-        return this.translations[0].title;
-    }
+    
+    public deserialize(input : any){
+        Deserializer.deserialize(this, input);
 
-    public setIdentifier(id : string){
-        this.translations[0].title = id;
-    }
+        this.translations = Deserializer.deserializeAll(
+            this.translations,
+            this.factory,
+            DataTypes.SuccessStoryTranslation
+        ) as SuccessStoryTranslation[];
 
-    protected _deserialize(input : any) : ApiData {
+        //set current language based on global language field (test if that works correctly)
+
+        let new_client = this.factory.create(DataTypes.Client);
+        this.client = new_client.deserialize(this.client);
+        let new_vendor = this.factory.create(DataTypes.Vendor);
+        this.vendor = new_vendor.deserialize(this.vendor);
+        this.products = Deserializer.deserializeAll(this.products, this.factory, DataTypes.Product);
         return this;
     }
 
-    protected _serialize() : any {
-        return this;
-    }
+    public set language(lang : string) { } //find translation with that language else throw or something
 
-    public isValid() : boolean{
-        return true;
+    public get identifier() : string | Status { 
+        return this.currentTranslation != Status.Empty ? this.currentTranslation.identifier : Status.Empty;
     }
+    public set identifier(id : string | Status){ if(this.currentTranslation != Status.Empty) this.currentTranslation.identifier = id; }
+
+    public read() : string { return Query.SuccessStory; }
+    public create() : string { return Mutation.createSuccessStory; }
+    public update() : string { return Mutation.updateSuccessStory; }
+    public delete() : string { return Mutation.deleteSuccessStory; }
 }
 
-export class SuccessStoryTranslation extends ApiData{
+export class SuccessStoryTranslation extends ApiData implements Translation {
 
-    language : string = null;
-    title : string = null;
-    lead : string = null;
-    base : string = null;
-    goal : string = null;
-    proposal : string = null;
-    outcome : string = null;
+    language : string | Status = Status.Empty;
+    title    : string | Status = Status.Empty;
+    lead     : string | Status = Status.Empty;
+    base     : string | Status = Status.Empty;
+    goal     : string | Status = Status.Empty;
+    proposal : string | Status = Status.Empty;
+    outcome  : string | Status = Status.Empty;
 
+    public set identifier(id : string | Status ){ this.title = id; }
+    public get identifier() : string | Status { return this.title; }
 
-    public setIdentifier(id : string ){
-        this.title = id;
-    }
+    public deserialize(input : any){ return Deserializer.deserialize(this, input); }
 
-    public getIdentifier() : string {
-        return this.title;
-    }
-
-    protected _deserialize(input : any) : ApiData {
-        return this;
-    }
-
-    protected _serialize() : any {
-        return this;
-    }
-
-    public isValid() : boolean{
-        return true;
-    }
+    public read()  : string { return Query.SuccessStoryTranslation; }
+    public create(): string { return Mutation.createSuccessStoryTranslation; }
+    public update(): string { return Mutation.updateSuccessStoryTranslation; }
+    public delete(): string { return Mutation.deleteSuccessStoryTranslation; }
 }
