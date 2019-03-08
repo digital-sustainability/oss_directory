@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../shared/data/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiData} from '../../../shared/data/api-data';
-import { map, switchMap, share } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { HttpService } from '../../../shared/sails/http.service';
-import { ApiUrl } from '../../../shared/url/api-url';
-import { of, Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { Status } from '../../../shared/model/status';
 
 @Component({
@@ -23,8 +22,7 @@ export class FormComponent implements OnInit {
     private router : Router,
     private route : ActivatedRoute, 
     private provider : DataService,
-    private http : HttpService,
-    private url : ApiUrl){}
+    private http : HttpService){}
 
     //maybe create two forms : one for new entries and one for editing?
     //later for different behavior and views
@@ -47,13 +45,13 @@ export class FormComponent implements OnInit {
       }),
       switchMap( data => {
         if (data.identifier != Status.Empty){
-          return this.provider.send(data.read());
+          return this.provider.getData(this.route);
         } else {
-          return of(data);
+          return of([data]);
         }
       })
     );
-    obs.subscribe(res => this.data = res);
+    obs.subscribe(res => this.data = res[0]);
   }
 
   private submit(){

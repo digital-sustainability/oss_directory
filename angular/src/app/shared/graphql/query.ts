@@ -1,3 +1,6 @@
+/**
+ * List of all select queries
+ */
 
 const AddressFields = '_id, street, city, zip, additional, title, country,';
 const OrganisationFields = '_id, title, logo,'
@@ -6,8 +9,8 @@ const ProductFields = '_id, title, logo, source_code_link, links,';
 const SuccessStoryTranslationFields = '_id, title, lead, base, goal, proposal, outcome,';
 
 
-export const VendorQuery = { "query" : `query vendor($id : String, $title : String){
-    list : Vendor(_id : $id, title : $title ) { 
+export const VendorQuery = { "query" : `query vendor($_id : Int, $title : String){
+    list : Vendor(_id : $_id, title : $title ) { 
         ${OrganisationFields}
       address { ${AddressFields} }
       translations { ${OrganisationTranslationFields} }
@@ -28,9 +31,9 @@ export const VendorQuery = { "query" : `query vendor($id : String, $title : Stri
         translations { ${OrganisationTranslationFields} }
       }
     }
-  }`, 'variables' : { 'id' : null, 'title' : null }};
-export const ClientQuery = { "query" : `query client($id : String, $title : String){ 
-    list : Client(_id : $id, title : $title) { 
+  }`, 'variables' : { '_id' : null, 'title' : null }};
+export const ClientQuery = { "query" : `query client($_id : ID, $title : String){ 
+    list : Client(_id : $_id, title : $title) { 
         ${OrganisationFields}
 	    address { ${AddressFields} }
         industry { _id, title, description }
@@ -49,9 +52,9 @@ export const ClientQuery = { "query" : `query client($id : String, $title : Stri
         communities { ${OrganisationFields}
             translations { ${OrganisationTranslationFields} }
         }
-	} }`, 'variables' : { 'id' : null, 'title' : null}};
-export const CommunityQuery = { "query" : `query community($id : String, $title : String){
-    list : Community(_id : $id, title : $title) {
+	} }`, 'variables' : { '_id' : null, 'title' : null}};
+export const CommunityQuery = { "query" : `query community($_id : ID, $title : String){
+    list : Community(_id : $_id, title : $title) {
         ${OrganisationFields}
         address { ${AddressFields} }
         translations { ${OrganisationTranslationFields} }
@@ -72,12 +75,16 @@ export const CommunityQuery = { "query" : `query community($id : String, $title 
             translations { ${OrganisationTranslationFields} }
         }
     }
-}`, 'variables' : {'id' : null, 'title' : null }};
-export const OrganisationTranslationQuery = {};
-export const CategoryQuery = {};
-export const AddressQuery = {};
-export const ProductQuery = { 'query' : `query res($id : String, $title : String){
-    list : Product(_id : $id, title : $title){ ${ProductFields}
+}`, 'variables' : {'_id' : null, 'title' : null }};
+
+export const OrganisationTranslationQuery = null;
+
+export const CategoryQuery = null;
+
+export const AddressQuery = null;
+
+export const ProductQuery = { 'query' : `query res($_id : ID, $title : String){
+    list : Product(_id : $_id, title : $title){ ${ProductFields}
     translations { _id, description }
     vendors { 
         service_type
@@ -88,15 +95,18 @@ export const ProductQuery = { 'query' : `query res($id : String, $title : String
         translations { ${SuccessStoryTranslationFields} }
     }
     }
-}`, 'variables' : {'id' : null, 'title' : null}};
-export const ProductTranslationQuery = {};
-export const SuccessStoryQuery = { 'query' : `query res(id : String, title : String){
-    list : SuccessStory(_id : $id, title : $title){
+}`, 'variables' : {'_id' : null, 'title' : null}};
+
+export const ProductTranslationQuery = null;
+
+export const SuccessStoryQuery = { 'query' : `query res($_id : ID, $title : String){
+    list : SuccessStory(_id : $_id, title : $title){
         translations { ${SuccessStoryTranslationFields} }
         vendor { ${OrganisationFields } }
         client { ${OrganisationFields } }
     }
-}`, 'variables' : {'id' : null, 'title' : null}};
-export const SuccessStoryTranslationQuery = {};
+}`, 'variables' : {'_id' : null, 'title' : null}};
+
+export const SuccessStoryTranslationQuery = null;
 
 

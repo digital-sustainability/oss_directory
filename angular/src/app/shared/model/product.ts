@@ -37,6 +37,8 @@ export class Product extends ApiData implements TranslationHolder {
             this.factory,
             DataTypes.ProductTranslation) as ProductTranslation[];
 
+        
+        this.language = 'test';
         //set current language based on global language field (test if that works correctly)
 
         this.vendors = Deserializer.deserializeAll(this.vendors, this.factory, DataTypes.Vendor);
@@ -46,7 +48,9 @@ export class Product extends ApiData implements TranslationHolder {
         return this;
     }
 
-    public set language(lang : string) {} //set current language field if exists
+    public set language(lang : string) {
+        this.currentTranslation = this.translations != Status.Empty ? this.translations[0] as ProductTranslation : Status.Empty;
+    } //set current language field if exists
 
     public READ = ProductQuery;
     public CREATE = createProduct;

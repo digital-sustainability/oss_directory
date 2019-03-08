@@ -20,12 +20,15 @@ export class ProductDetailComponent implements OnInit {
 
   @Input() set data(data : ApiData) {
     if(data) {
+      console.log(data);
       this.product = data as Product;
     }
   }
 
   constructor(private provider : DataService){}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
 }

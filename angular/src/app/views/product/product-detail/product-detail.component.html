@@ -5,8 +5,7 @@
       <img mat-card-md-image src="./assets/img/cof_orange_hex.png">
   </mat-card-title-group>
 
-  <mat-card-content *ngIf='product.translation'>
-    {{product.translation.description}}
+  <mat-card-content [innerHtml]='product.currentTranslation.description'>
   </mat-card-content>
 
   <div *ngIf='product.links'>

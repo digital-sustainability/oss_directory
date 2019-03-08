@@ -4,7 +4,6 @@ import { Organisation, OrganisationTranslation } from '../../../shared/model/org
 import { ApiData } from '../../../shared/data/api-data';
 import { Observable } from 'rxjs';
 import { HttpService } from '../../../shared/sails/http.service';
-import { ApiUrl } from '../../../shared/url/api-url';
 
 @Component({
   selector: 'app-vendor-form',
@@ -22,7 +21,7 @@ export class VendorFormComponent implements OnInit {
   @Input() data : Observable<ApiData>;
 
   @Output() _submit : EventEmitter<ApiData> = new EventEmitter();
-  constructor(private http : HttpService, private url : ApiUrl) {}
+  constructor(private http : HttpService) {}
 
   ngOnInit() {
     this.data.subscribe(res => {

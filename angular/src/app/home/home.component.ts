@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/data/data.service';
+import { Vendor } from '../shared/model/vendor';
+import { Factory } from '../shared/model/factory';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +15,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.data.test();
   }
 
 }

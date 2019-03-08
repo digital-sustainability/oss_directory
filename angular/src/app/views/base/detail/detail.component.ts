@@ -18,6 +18,8 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.provider.type(this.route).subscribe(type => this.type = type);
-    this.provider.getData(this.route).subscribe(data => this.data = data);
+
+    //should only have one item in list (therefor data[0]) but we should handle that differently somehow i think
+    this.provider.getData(this.route).subscribe(data => this.data = data[0]);
   }
 }

@@ -2,10 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiData } from '../../../shared/data/api-data';
 import { Category } from '../../../shared/model/category';
 import { HttpService } from '../../../shared/sails/http.service';
-import { ApiUrl } from '../../../shared/url/api-url';
 import { ProductTranslation, Product } from '../../../shared/model/product';
-import { Observable } from 'rxjs';
-import { Factory } from '../../../shared/model/factory';
 
 @Component({
   selector: 'app-product-form',
@@ -38,14 +35,14 @@ export class ProductFormComponent implements OnInit {
   @Output() _submit : EventEmitter<ApiData> = new EventEmitter(); //not used right now (we could call parent class this way)
 
   constructor(
-    private http : HttpService, 
-    private url : ApiUrl){}
+    private http : HttpService){}
 
   ngOnInit(){
 
   }
 
-  public setup(test){
+  public setup(data){
+    this.product = data as Product;
     
   }
   // ngOnInit() {

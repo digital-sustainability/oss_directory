@@ -41,7 +41,7 @@ module.exports.routes = {
   },
 
 
-  'post /api/neo/test' : 'neo/test',
+  
 
   /**
    * Auth routes
@@ -50,6 +50,8 @@ module.exports.routes = {
   'post /api/login': 'AuthController.login',
   'get /api/check-login': 'AuthController.check-login',
   'post /api/logout': 'AuthController.logout',
+
+  'post /api' : 'neo/index',
 
   /***************************************************************************
   *                                                                          *

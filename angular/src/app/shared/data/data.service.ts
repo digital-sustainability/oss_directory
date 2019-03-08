@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of, zip } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { ApiUrl } from '../url/api-url';
 import { HttpService } from '../sails/http.service';
 import { Factory } from '../model/factory';
 import { ApiData } from './api-data';
 import { environment } from '../../../environments/environment';
-import { Vendor } from '../model/vendor';
 import { Status } from '../model/status';
-import { OrganisationTranslation } from '../model/organisation';
 
 @Injectable({
     providedIn: 'root'
@@ -18,22 +15,25 @@ import { OrganisationTranslation } from '../model/organisation';
 export class DataService {
     
     constructor(
-        private http : HttpService,
-        private url : ApiUrl ){}
+        private http : HttpService){}
     
-    public test(){
-
-    }
-
-    public makeRequest(object : ApiData, request) {
+    private makeRequest(object : ApiData, request) {
+        if (!request) console.log("request not yet defined sry :)");
         for (let prop in request.variables){
-            request.variables[prop] = object[prop] != Status.Empty ? object[prop] : null;
+            if (object[prop] != Status.Empty){
+                request.variables[prop] = object[prop];
+            } else { //remove the variable
+                delete request.variables[prop];
+            }
         }
         return request;
     }
 
-    public send(graphql_request : any) : Observable<any> {
-        return this.http.post(environment.apiURL + "api/neo/test", graphql_request);
+    public sendRequest(data : ApiData, request : any) : Observable<any> {
+        let graphql_request = this.makeRequest(data, request);
+        console.log("in progress");
+        return null;
+        return this.http.post(environment.apiURL + "api/", graphql_request);
     }
 
     /**
@@ -48,8 +48,8 @@ export class DataService {
             {
                 if(data)
                 {
-                    let request = this.makeRequest(data, data.READ);
-                    return this.send(request).pipe(map(res => {
+                    console.log(data);
+                    return this.sendRequest(data, data.READ).pipe(map(res => {
                         console.log(res);
                         let entries = [];
                         for (let entry of res.data.list){

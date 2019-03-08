@@ -10,8 +10,7 @@ import { Status } from "./status";
 export abstract class Organisation extends ApiData implements TranslationHolder {
     
     title       : string    | Status = Status.Empty;
-    logo_vector : string    | Status = Status.Empty;
-    logo_pixel  : string    | Status = Status.Empty;
+    logo        : string    | Status = Status.Empty;
     address     : ApiData   | Status = Status.Empty;
     translations: OrganisationTranslation[] | Status = Status.Empty;
     users       : ApiData[] | Status = Status.Empty;

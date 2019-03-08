@@ -16,7 +16,6 @@ import { ReferenceListComponent } from '../../views/reference/reference-list/ref
 import { ReferenceListItemComponent } from '../../views/reference/reference-list-item/reference-list-item.component';
 import { ReferenceDetailComponent } from '../../views/reference/reference-detail/reference-detail.component';
 import { DataService } from '../../shared/data/data.service';
-import { ApiUrl } from '../../shared/url/api-url';
 import { MaterialDesignModule } from '../../shared/material-design/material-design.module';
 
 
@@ -53,7 +52,6 @@ import { MaterialDesignModule } from '../../shared/material-design/material-desi
   ],
   providers: [
     DataService,
-    ApiUrl,
   ],
 })
 export class ViewerModule { }

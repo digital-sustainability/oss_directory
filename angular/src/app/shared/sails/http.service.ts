@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiUrl } from '../url/api-url';
 
 
 @Injectable({
@@ -9,7 +8,7 @@ import { ApiUrl } from '../url/api-url';
 })
 export class HttpService{
 
-  constructor(private http: HttpClient, private url : ApiUrl) {}
+  constructor(private http: HttpClient) {}
 
   request(options): Observable<any>{
     return
