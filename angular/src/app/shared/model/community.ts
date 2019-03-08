@@ -1,6 +1,6 @@
 
-import { Query } from "../graphql/query";
-import { Mutation } from "../graphql/mutation";
+import { CommunityQuery } from "../graphql/query";
+import { createCommunity, updateCommunity, deleteCommunity } from "../graphql/mutation";
 import { Organisation } from "./organisation";
 import { ApiData } from "../data/api-data";
 import { Deserializer } from "../data/deserializer";
@@ -22,9 +22,9 @@ export class Community extends Organisation {
         return this;
     }
 
-    public read() : string { return Query.Community; }
-    public create() : string { return Mutation.createCommunity; }
-    public update() : string { return Mutation.updateCommunity; }
-    public delete() : string { return Mutation.deleteCommunity; }
+    public READ = CommunityQuery; 
+    public CREATE = createCommunity; 
+    public UPDATE = updateCommunity; 
+    public DELETE = deleteCommunity; 
 
 }

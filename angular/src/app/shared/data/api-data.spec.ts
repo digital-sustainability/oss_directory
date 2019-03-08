@@ -4,12 +4,15 @@ import { DataTypes } from "../model/types";
 import { Status } from "../model/status";
 import { Client } from "../model/client";
 import { vendor_data, client_data, address_data } from "./api-data.spec.res";
+import { DataService } from "./data.service";
+import { Apollo } from "apollo-angular";
 
 describe('Api Data', () => {
     
   
     
-    beforeEach(() => {});
+    beforeEach(() => {
+    });
 
     for (let item in DataTypes) {
         let data = Factory.create(item);
@@ -36,7 +39,7 @@ describe('Api Data', () => {
 
     it ("Client should be able to deserialize", () => {
       let client = new Client(Factory);
-      expect(client.deserialize.bind(client_data['data']['Client'][0])).not.toThrow();
+      expect(client.deserialize.bind(client, client_data['data']['Client'][0])).not.toThrow();
     })
     
   });

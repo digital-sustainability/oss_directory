@@ -1,5 +1,5 @@
-import { Mutation } from "../graphql/mutation";
-import { Query } from "../graphql/query";
+import { createAddress, updateAddress, deleteAddress } from "../graphql/mutation";
+import { AddressQuery } from "../graphql/query";
 import { ApiData} from "../data/api-data";
 import { Deserializer } from "../data/deserializer";
 import { Status } from "./status";
@@ -14,13 +14,12 @@ export class Address extends ApiData{
     zip          : number | Status = Status.Empty;
     state        : string | Status = Status.Empty;
 
-    public deserialize(input : any) : ApiData | Status { 
-        return Deserializer.deserialize(this, input); }
+    public deserialize(input : any){ return Deserializer.deserialize(this, input); }
 
-    public read()  : string { return Query.Address; }
-    public create(): string { return Mutation.createAddress; }
-    public update(): string { return Mutation.updateAddress; }
-    public delete(): string { return Mutation.deleteAddress; }
+    public  READ = AddressQuery;
+    public  CREATE = createAddress;
+    public  UPDATE = updateAddress; 
+    public  DELETE = deleteAddress;
 
 
 

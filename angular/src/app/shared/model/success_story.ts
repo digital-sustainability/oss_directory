@@ -1,5 +1,5 @@
-import { Mutation } from "../graphql/mutation";
-import { Query } from "../graphql/query";
+import { createSuccessStory, updateSuccessStory, deleteSuccessStory, updateSuccessStoryTranslation, deleteSuccessStoryTranslation, createSuccessStoryTranslation } from "../graphql/mutation";
+import { SuccessStoryQuery, SuccessStoryTranslationQuery } from "../graphql/query";
 import { TranslationHolder, Translation } from "./translation.interface";
 import { ApiData } from "../data/api-data";
 import { Deserializer } from "../data/deserializer";
@@ -28,9 +28,9 @@ export class SuccessStory extends ApiData implements TranslationHolder {
         //set current language based on global language field (test if that works correctly)
 
         let new_client = this.factory.create(DataTypes.Client);
-        this.client = new_client.deserialize(this.client);
+        this.client = this.client != Status.Empty ? new_client.deserialize(this.client) : Status.Empty;
         let new_vendor = this.factory.create(DataTypes.Vendor);
-        this.vendor = new_vendor.deserialize(this.vendor);
+        this.vendor = this.vendor != Status.Empty ? new_vendor.deserialize(this.vendor) : Status.Empty;
         this.products = Deserializer.deserializeAll(this.products, this.factory, DataTypes.Product);
         return this;
     }
@@ -42,10 +42,10 @@ export class SuccessStory extends ApiData implements TranslationHolder {
     }
     public set identifier(id : string | Status){ if(this.currentTranslation != Status.Empty) this.currentTranslation.identifier = id; }
 
-    public read() : string { return Query.SuccessStory; }
-    public create() : string { return Mutation.createSuccessStory; }
-    public update() : string { return Mutation.updateSuccessStory; }
-    public delete() : string { return Mutation.deleteSuccessStory; }
+    public READ = SuccessStoryQuery; 
+    public CREATE = createSuccessStory; 
+    public UPDATE = updateSuccessStory; 
+    public DELETE = deleteSuccessStory; 
 }
 
 export class SuccessStoryTranslation extends ApiData implements Translation {
@@ -63,8 +63,8 @@ export class SuccessStoryTranslation extends ApiData implements Translation {
 
     public deserialize(input : any){ return Deserializer.deserialize(this, input); }
 
-    public read()  : string { return Query.SuccessStoryTranslation; }
-    public create(): string { return Mutation.createSuccessStoryTranslation; }
-    public update(): string { return Mutation.updateSuccessStoryTranslation; }
-    public delete(): string { return Mutation.deleteSuccessStoryTranslation; }
+    public READ = SuccessStoryTranslationQuery;
+    public CREATE = createSuccessStoryTranslation;
+    public UPDATE = updateSuccessStoryTranslation;
+    public DELETE = deleteSuccessStoryTranslation;
 }

@@ -1,3 +1,3 @@
 export enum Status {
-    Empty = "QBIahtLgf3679PegHfey"
+    Empty = "Empty_Value"
 }

@@ -1,5 +1,5 @@
 <mat-list-item *ngIf='item' [ngSwitch]='type'>
-  <mat-card mat-button routerLink="/content/{{type}}/{{item.getIdentifier()}}">
+  <mat-card mat-button routerLink="/content/{{type}}/{{item.identifier}}">
       <app-product-list-item *ngSwitchCase="'product'" [item]='item'></app-product-list-item>
       <app-vendor-list-item *ngSwitchCase="'vendor'" [item]='item'></app-vendor-list-item>
       <app-reference-list-item *ngSwitchCase="'reference'" [item]='item'></app-reference-list-item>

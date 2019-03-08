@@ -1,5 +1,5 @@
-import { Mutation } from "../graphql/mutation";
-import { Query } from "../graphql/query";
+import { createVendor, updateVendor, deleteVendor } from "../graphql/mutation";
+import { VendorQuery } from "../graphql/query";
 import { Organisation } from "./organisation";
 import { DataTypes } from "./types";
 import { Deserializer } from "../data/deserializer";
@@ -10,7 +10,7 @@ export class Vendor extends Organisation {
 
     website      : string | Status = Status.Empty;
     locations    : string | Status = Status.Empty;
-    employee_num : number | Status = Status.Empty;
+    employee_num : Number | Status = Status.Empty;
     
     products        : ApiData[] | Status = Status.Empty;
     success_stories : ApiData[] | Status = Status.Empty;
@@ -26,10 +26,11 @@ export class Vendor extends Organisation {
         return this;
     }
 
-    public read()  : string { return Query.Vendor; }
-    public create(): string { return Mutation.createVendor; }
-    public update(): string { return Mutation.updateVendor; }
-    public delete(): string { return Mutation.deleteVendor; }
+    public READ = VendorQuery;
+    public CREATE = createVendor;
+    public UPDATE = updateVendor;
+    public DELETE = deleteVendor;
+
 }
 
 export class VendorServices extends ApiData {
@@ -46,9 +47,32 @@ export class VendorServices extends ApiData {
         return this;
     }
 
-    public read()  : string { return Query.Vendor; }
-    public create(): string { return Mutation.createVendor; }
-    public update(): string { return Mutation.updateVendor; }
-    public delete(): string { return Mutation.deleteVendor; }
+    public READ = VendorQuery;
+    public CREATE = createVendor;
+    public UPDATE = updateVendor;
+    public DELETE = deleteVendor;
+
+    //return the right add mutation
+    public CONNECT(data : ApiData) {
+        switch(data.getName()){
+            case DataTypes.Product: {
+                break;
+            }
+            case DataTypes.Address: {
+                break;
+            }
+            case DataTypes.SuccessStory: {
+                break;
+            }
+            case DataTypes.Community: {
+                break;
+            }
+            case DataTypes.Client: {
+                break;
+            }
+            default: 
+                return Status.Empty;
+        }
+    }
 
 }

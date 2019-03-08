@@ -20,6 +20,7 @@ import { MatStepperModule, MatInputModule, MatButtonModule, MatAutocompleteModul
 import { NavbarComponent } from './views/navbar/navbar.component';
 import { ViewerModule } from './modules/viewer/viewer.module';
 
+
 export function appInitFactory(authService: AuthService): () => Promise<any> {
   return () => authService.checkLogin().toPromise();
 }

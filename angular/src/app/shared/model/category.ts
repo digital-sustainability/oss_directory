@@ -1,5 +1,5 @@
-import { Query } from "../graphql/query";
-import { Mutation } from "../graphql/mutation";
+import { CategoryQuery } from "../graphql/query";
+import { createCategory, updateCategory, deleteCategory } from "../graphql/mutation";
 import { ApiData } from "../data/api-data";
 import { Deserializer } from "../data/deserializer";
 import { Status } from "./status";
@@ -14,9 +14,9 @@ export class Category extends ApiData {
 
     public deserialize(input : any){ return Deserializer.deserialize(this, input); }
 
-    public read()  : string { return Query.Category; }
-    public create(): string { return Mutation.createCategory; }
-    public update(): string { return Mutation.updateCategory; }
-    public delete(): string { return Mutation.deleteCategory; }
+    public READ = CategoryQuery; 
+    public CREATE = createCategory; 
+    public UPDATE = updateCategory; 
+    public DELETE = deleteCategory; 
 
 }

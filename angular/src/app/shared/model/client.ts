@@ -1,5 +1,5 @@
-import { Query } from "../graphql/query";
-import { Mutation } from "../graphql/mutation";
+import { ClientQuery } from "../graphql/query";
+import { createClient, updateClient, deleteClient } from "../graphql/mutation";
 import { Organisation } from "./organisation";
 import { ApiData} from "../data/api-data";
 import { Deserializer } from "../data/deserializer";
@@ -23,9 +23,9 @@ export class Client extends Organisation {
         return this;
     }
 
-    public read() : string { return Query.Client; }
-    public create() : string { return Mutation.createClient; }
-    public update() : string { return Mutation.updateClient; }
-    public delete() : string { return Mutation.deleteClient; }
+    public READ = ClientQuery; 
+    public CREATE = createClient; 
+    public UPDATE = updateClient; 
+    public DELETE = deleteClient; 
 
 }

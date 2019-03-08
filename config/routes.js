@@ -40,20 +40,8 @@ module.exports.routes = {
     action: "security/grant-csrf-token"
   },
 
-  'get /api/vendor/:id' : 'vendor/find-one', //as action2 is not the same name as the controller action findOne it does not get routed correctly.
-  'get /api/product/:id' : 'product/find-one',
-  'get /api/client/:id' : 'client/find-one',
-  'get /api/community/:id' : 'community/find-one',
-  'get /api/successstory/:id' : 'successstory/find-one',
-  'get /api/organisation/:id' : 'organisation/find-one',
 
   'post /api/neo/test' : 'neo/test',
-
-  'patch /api/vendor/:id' : 'vendor/update-one',
-  'patch /api/product/:id' : 'product/update-one',
-  'patch /api/client/:id' : 'client/update-one',
-  'patch /api/community/:id' : 'community/update-one',
-  'patch /api/successstory/:id' : 'successstory/update-one',
 
   /**
    * Auth routes

@@ -1,6 +1,6 @@
 
-import { Query } from "../graphql/query";
-import { Mutation } from "../graphql/mutation";
+import { OrganisationTranslationQuery } from "../graphql/query";
+import { createOrganisationTranslation, updateOrganisationTranslation, deleteOrganisationTranslation } from "../graphql/mutation";
 import { ApiData} from "../data/api-data";
 import { Translation, TranslationHolder } from "./translation.interface";
 import { DataTypes } from "./types";
@@ -56,9 +56,9 @@ export class OrganisationTranslation extends ApiData implements Translation {
     public deserialize(input : any){ 
         return Deserializer.deserialize(this, input); }
 
-    public read()  : string { return Query.OrganisationTranslation; }
-    public create(): string { return Mutation.createOrganisationTranslation; }
-    public update(): string { return Mutation.updateOrganisationTranslation; }
-    public delete(): string { return Mutation.deleteOrganisationTranslation; }
+    public READ = OrganisationTranslationQuery;
+    public CREATE = createOrganisationTranslation;
+    public UPDATE = updateOrganisationTranslation;
+    public DELETE = deleteOrganisationTranslation;
 
 }

@@ -4,6 +4,7 @@ import { ApiData } from "../data/api-data";
 import { Vendor } from "../model/vendor";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { of } from "rxjs";
+import { Factory } from "../model/factory";
 
 
 describe('Http Service', () => {
@@ -28,7 +29,7 @@ describe('Http Service', () => {
   });
 
   it('should return expected data', () => {
-    const expectedData : ApiData[] = [new Vendor(), new Vendor(), new Vendor()];
+    const expectedData : ApiData[] = [new Vendor(Factory), new Vendor(Factory), new Vendor(Factory)];
     serviceSpy.get.and.returnValue(of(expectedData));
 
     httpService.get("").subscribe(

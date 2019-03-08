@@ -1,5 +1,5 @@
-import { Query } from "../graphql/query";
-import { Mutation } from "../graphql/mutation";
+import { ProductQuery, ProductTranslationQuery } from "../graphql/query";
+import { createProductTranslation, updateProductTranslation, deleteProductTranslation, createProduct, updateProduct, deleteProduct } from "../graphql/mutation";
 import { ApiData } from "../data/api-data";
 import { Translation, TranslationHolder } from "./translation.interface";
 import { Deserializer } from "../data/deserializer";
@@ -30,9 +30,7 @@ export class Product extends ApiData implements TranslationHolder {
     public deserialize(input : any){
         Deserializer.deserialize(this, input);
         let new_category = this.factory.create(DataTypes.Category);
-        if (this.category != Status.Empty) {
-            this.category = new_category.deserialize(this.category);
-        }
+        this.category = this.category != Status.Empty ? new_category.deserialize(this.category) : Status.Empty;
         
         this.translations = Deserializer.deserializeAll(
             this.translations,
@@ -50,10 +48,10 @@ export class Product extends ApiData implements TranslationHolder {
 
     public set language(lang : string) {} //set current language field if exists
 
-    public read()  : string { return Query.Product; }
-    public create(): string { return Mutation.createProduct; }
-    public update(): string { return Mutation.updateProduct; }
-    public delete(): string { return Mutation.deleteProduct; }
+    public READ = ProductQuery;
+    public CREATE = createProduct;
+    public UPDATE = updateProduct;
+    public DELETE = deleteProduct;
 }
 
 export class ProductTranslation extends ApiData implements Translation{
@@ -63,8 +61,8 @@ export class ProductTranslation extends ApiData implements Translation{
 
     public deserialize(input : any){ return Deserializer.deserialize(this, input); }
 
-    public read()  : string { return Query.ProductTranslation; }
-    public create(): string { return Mutation.createProductTranslation; }
-    public update(): string { return Mutation.updateProductTranslation; }
-    public delete(): string { return Mutation.deleteProductTranslation; }
+    public READ = ProductTranslationQuery; 
+    public CREATE = createProductTranslation; 
+    public UPDATE = updateProductTranslation;
+    public DELETE = deleteProductTranslation;
 }

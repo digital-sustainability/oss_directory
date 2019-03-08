@@ -18,7 +18,6 @@ export abstract class Setup {
 
   public requestData() {
     //here we can handle any errors and redirect to other views or try to solve the error 
-
     return this.provider.getData(this.route);
   }
 

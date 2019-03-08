@@ -5,7 +5,7 @@
     <app-reference-detail *ngSwitchCase="'reference'" [data]='data'></app-reference-detail>
     
     <mat-card-actions>
-        <a mat-button routerLink="/content/{{type}}/edit/{{data.getIdentifier()}}">Edit</a>
+        <a mat-button routerLink="/content/{{type}}/edit/{{data.identifier}}">Edit</a>
     </mat-card-actions>
     
   </mat-card>

@@ -7,20 +7,33 @@ import { HttpService } from '../sails/http.service';
 import { Factory } from '../model/factory';
 import { ApiData } from './api-data';
 import { environment } from '../../../environments/environment';
+import { Vendor } from '../model/vendor';
+import { Status } from '../model/status';
+import { OrganisationTranslation } from '../model/organisation';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class DataService {
-
     
     constructor(
         private http : HttpService,
         private url : ApiUrl ){}
+    
+    public test(){
 
-    public send(graphql_request : string) : Observable<any> {
-        return this.http.post(environment.graphQlUrl, graphql_request);
+    }
+
+    public makeRequest(object : ApiData, request) {
+        for (let prop in request.variables){
+            request.variables[prop] = object[prop] != Status.Empty ? object[prop] : null;
+        }
+        return request;
+    }
+
+    public send(graphql_request : any) : Observable<any> {
+        return this.http.post(environment.apiURL + "api/neo/test", graphql_request);
     }
 
     /**
@@ -35,7 +48,18 @@ export class DataService {
             {
                 if(data)
                 {
-                    return this.send(data.read());
+                    let request = this.makeRequest(data, data.READ);
+                    return this.send(request).pipe(map(res => {
+                        console.log(res);
+                        let entries = [];
+                        for (let entry of res.data.list){
+                            if (!entry) continue;
+                            let x = Factory.create(data.getName());
+                            x.deserialize(entry);
+                            entries.push(x);
+                        }
+                        return entries;
+                    }));
                 } else {
                     //TODO: exception handling
                 }
@@ -64,6 +88,8 @@ export class DataService {
     public id(route : ActivatedRoute) : Observable<string> {
         return route.params.pipe(map(params => params['id']));
     }
+
+
 
 
 }

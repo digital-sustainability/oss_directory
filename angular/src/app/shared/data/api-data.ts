@@ -11,6 +11,7 @@ export abstract class ApiData {
         protected factory : Factory, 
         input? : any){
             if(input) this.deserialize(input);
+
         }
 
      //class name corresponds with db model!
@@ -20,9 +21,11 @@ export abstract class ApiData {
     public get identifier() : string | Status { return this.uid + "" }
 
     abstract deserialize(input : any) : ApiData | Status;
-    public abstract read() : string;
-    public abstract create() : string;
-    public abstract update() : string;
-    public abstract delete() : string;
+
+    public abstract READ;
+    public abstract CREATE;
+    public abstract UPDATE;
+    public abstract DELETE;
+
 }
 
